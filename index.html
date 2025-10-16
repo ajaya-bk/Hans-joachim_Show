@@ -1,38 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Achim Musikshow 🎶</title>
+  <meta name="description" content="Berliner Musikfreunde - Live-Musikshows in Berlin. Erleben Sie unvergessliche Musikabende mit verschiedenen Künstlern und Stilen.">
+  <title>Berliner Musikfreunde 🎶 | Live-Musikshows in Berlin</title>
   <style>
     /* Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffecd2, #fcb69f);
-      color: #333;
-      line-height: 1.6;
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
     }
 
-    /* Hero Section */
+    :root {
+      --primary: #ff4e50;
+      --secondary: #f9d423;
+      --accent: #ff7e5f;
+      --light: #ffecd2;
+      --dark: #333;
+      --text: #444;
+      --white: #fff;
+      --shadow: 0 6px 20px rgba(0,0,0,0.15);
+      --radius: 18px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--light), #fcb69f);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
     header {
-      background: linear-gradient(135deg, #ff4e50, #f9d423);
-      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
       padding: 60px 20px;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: cover;
     }
 
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
       animation: slideIn 1s ease-in-out;
+      position: relative;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
     header p {
-      font-size: 1.2rem;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
 
     @keyframes slideIn {
@@ -40,9 +77,9 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* Show Section */
+    /* Container */
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 40px auto;
       padding: 0 20px;
       display: grid;
@@ -50,66 +87,118 @@
       gap: 30px;
     }
 
+    /* Show Cards */
     .show-card {
-      background: white;
-      border-radius: 18px;
+      background: var(--white);
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
-     .show-card:hover {
+    .show-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
 
     .show-card img {
       width: 100%;
       height: 250px;
       object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .show-card:hover img {
+      transform: scale(1.05);
     }
 
     .show-content {
-      padding: 20px;
-      text-align: left;
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .show-content h2 {
       font-size: 1.5rem;
-      margin-bottom: 8px;
-      color: #ff4e50;
+      margin-bottom: 15px;
+      color: var(--primary);
+      line-height: 1.3;
     }
 
     .show-content p {
-      margin: 6px 0;
+      margin: 8px 0;
       font-size: 1rem;
+    }
+
+    .show-content a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .show-content a:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     .highlight {
       background: #ffebcc;
-      padding: 3px 6px;
+      padding: 4px 8px;
       border-radius: 6px;
       font-weight: bold;
+      display: inline-block;
     }
 
-   /* Footer */
+    .ticket-info {
+      margin-top: auto;
+      padding-top: 15px;
+      border-top: 1px dashed #eee;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 78, 80, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 78, 80, 0.4);
+      text-decoration: none;
+    }
+
+    /* Footer */
     footer {
       background: #222;
       color: #ccc;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 30px 20px;
+      margin-top: 60px;
       font-size: 0.9rem;
     }
 
     footer a {
-      color: #f9d423;
+      color: var(--secondary);
       text-decoration: none;
     }
 
-    footer a:hover { text-decoration: underline; }
+    footer a:hover { 
+      text-decoration: underline; 
+    }
 
-    /* Modal Styles */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -118,17 +207,32 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.9);
       justify-content: center;
       align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .modal img {
+    .modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
       max-width: 90%;
       max-height: 90%;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.7);
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
       animation: zoomIn 0.3s ease;
+    }
+
+    .modal img {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
     }
 
     @keyframes zoomIn {
@@ -138,127 +242,182 @@
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 30px;
+      top: 15px;
+      right: 15px;
       font-size: 2rem;
       color: white;
       cursor: pointer;
       font-weight: bold;
+      background: rgba(0,0,0,0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      transition: background 0.3s;
+    }
+
+    .modal-close:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .show-content {
+        padding: 20px;
+      }
+      
+      header {
+        padding: 40px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .show-content h2 {
+        font-size: 1.3rem;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero -->
+  <!-- Header -->
   <header>
-    <h1>BERLINER MUSIKFREUNDE🎶</h1>
+    <h1>BERLINER MUSIKFREUNDE 🎶</h1>
     <p>Den Rhythmus des Lebens erleben – Live-Shows in Berlin</p>
   </header>
 
-  <!-- Shows -->
-  <div class="container">
-    <div class="show-card">
-      <img src="flyer4.jpg" alt="🎉 Wirtschaftswunderland 🎉"onclick="openModal(this)">
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Show 1 -->
+    <article class="show-card">
+      <img src="flyer4.jpg" alt="Wirtschaftswunderland Show Flyer" onclick="openModal(this)">
       <div class="show-content">
         <h2>🎉 Wirtschaftswunderland 🎉</h2>
-        <p><strong><span class="highlight">📍Standort: Preußisches Landwirtshaus,Flatowallee 23, 14055 Berlin</strong></span></p>
-        <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍Google Maps</a>
-        <p>📅 Datum: 18 Oktober 2025</p>
+        <p><strong><span class="highlight">📍 Standort:</span> Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</strong></p>
+        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
+        <p>📅 <strong>Datum:</strong> 18. Oktober 2025</p>
         <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
         <p><strong>Einlass:</strong> 16:00 Uhr</p>
         <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <p>
-        Ticket unter:
-        <a href="tel:+49 176 79212777">+49 176 79212777</a>
-        oder bei
-        <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a>
-        </p>
+        <div class="ticket-info">
+          <p><strong>Tickets erhältlich unter:</strong></p>
+          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
+          <p>oder bei <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a></p>
+          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <div class="show-card">
-      <img src="flyer6.jpg" alt="🌹 Rendezvous mit Claire Waldoff 🌹"onclick="openModal(this)">
+    <!-- Show 2 -->
+    <article class="show-card">
+      <img src="flyer6.jpg" alt="Rendezvous mit Claire Waldoff Show Flyer" onclick="openModal(this)">
       <div class="show-content">
-        <h2>🌹 Rendezvous mit Claire Waldoff🌹</h2>
-        <h2> mit </h2>
-        <h2><span class="highlight">Chanson-nette: Jeannette Urzendowsky und am Piano: Harry Ermer🌹</span></h2>
-        <p><strong><span class="highlight">📍Standort: Preußisches Landwirtshaus,Flatowallee 23, 14055 Berlin</strong></span></p>
-        <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍Google Maps</a>
-        <p>📅 Datum: 14 November 2025</p>
+        <h2>🌹 Rendezvous mit Claire Waldoff 🌹</h2>
+        <p><strong>mit</strong> <span class="highlight">Chanson-nette: Jeannette Urzendowsky und am Piano: Harry Ermer</span></p>
+        <p><strong><span class="highlight">📍 Standort:</span> Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</strong></p>
+        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
+        <p>📅 <strong>Datum:</strong> 14. November 2025</p>
         <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
         <p><strong>Einlass:</strong> 16:00 Uhr</p>
         <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <p>
-        Ticket unter:
-        <a href="tel:+49 176 79212777">+49 176 79212777</a>
-        oder bei
-        <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a>
-        </p>
+        <div class="ticket-info">
+          <p><strong>Tickets erhältlich unter:</strong></p>
+          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
+          <p>oder bei <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a></p>
+          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <div class="show-card">
-      <img src="flyer5.jpg" alt="🎶 Schlager🔹Rock'n Roll🔹CountrySaloon-Songs 🎶"onclick="openModal(this)">
+    <!-- Show 3 -->
+    <article class="show-card">
+      <img src="flyer5.jpg" alt="Schlager, Rock'n Roll und Country Saloon Songs Show Flyer" onclick="openModal(this)">
       <div class="show-content">
-        <h2>🎶 Schlager🔹Rock'n Roll🔹CountrySaloon-Songs 🎶</h2>
-        <p><strong><span class="highlight">📍Standort: Preußisches Landwirtshaus,Flatowallee 23, 14055 Berlin</strong></span></p>
-        <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍Google Maps</a>
-        <p>📅 Datum: 30 November 2025</p>
+        <h2>🎶 Schlager 🔹 Rock'n Roll 🔹 Country Saloon-Songs 🎶</h2>
+        <p><strong><span class="highlight">📍 Standort:</span> Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</strong></p>
+        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
+        <p>📅 <strong>Datum:</strong> 30. November 2025</p>
         <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
         <p><strong>Einlass:</strong> 16:00 Uhr</p>
         <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <p>
-        Ticket unter:
-        <a href="tel:+49 176 79212777">+49 176 79212777</a>
-        oder bei
-        <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a>
-        </p>
+        <div class="ticket-info">
+          <p><strong>Tickets erhältlich unter:</strong></p>
+          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
+          <p>oder bei <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a></p>
+          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <div class="show-card">
-      <img src="flyer7.jpg" alt="🎄❄️🎅🏼 Merry Christmas 🎅🏼❄️🎄"onclick="openModal(this)">
+    <!-- Show 4 -->
+    <article class="show-card">
+      <img src="flyer7.jpg" alt="Merry Christmas mit Stefanie Simon Show Flyer" onclick="openModal(this)">
       <div class="show-content">
-        <h2>🎄❄️🎅🏼 Merry Christmas mit STEFANIE SIMON🎅🏼❄️🎄</h2>
-        <p><strong><span class="highlight">📍Standort: Preußisches Landwirtshaus,Flatowallee 23, 14055 Berlin</strong></span></p>
-        <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍Google Maps</a>
-        <p>📅 Datum: 14 Dezember 2025</p>
+        <h2>🎄❄️🎅🏼 Merry Christmas mit STEFANIE SIMON 🎅🏼❄️🎄</h2>
+        <p><strong><span class="highlight">📍 Standort:</span> Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</strong></p>
+        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
+        <p>📅 <strong>Datum:</strong> 14. Dezember 2025</p>
         <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
         <p><strong>Einlass:</strong> 15:00 Uhr</p>
         <p><strong>Beginn:</strong> 16:00 Uhr</p>
-        <p>
-        Ticket unter:
-        <a href="tel:+49 176 79212777">+49 176 79212777</a>
-        oder bei
-        <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a>
-        </p>
+        <div class="ticket-info">
+          <p><strong>Tickets erhältlich unter:</strong></p>
+          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
+          <p>oder bei <a href="https://www.eventim-light.com/de/a/6880cce9797e5857693f513a" target="_blank">Eventim-light Berlin</a></p>
+          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        </div>
       </div>
-    </div>
-  </div>
-  
+    </article>
+  </main>
 
+  <!-- Image Modal -->
   <div id="imgModal" class="modal" onclick="closeModal()">
     <span class="modal-close" onclick="closeModal()">&times;</span>
-    <img id="modalImg" src="" alt="Flyer">
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="Vergrößerte Ansicht des Veranstaltungsflyers">
+    </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Musikshow in berlin | Mit ❤️ für Musikliebhaber entwickelt</p>
+    <p>© 2025 Berliner Musikfreunde | Mit ❤️ für Musikliebhaber entwickelt</p>
+    <p>Kontakt: <a href="tel:+4917679212777">+49 176 79212777</a></p>
   </footer>
 
   <script>
     function openModal(imgElement) {
-      document.getElementById("imgModal").style.display = "flex";
-      document.getElementById("modalImg").src = imgElement.src;
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImg");
+      
+      modal.classList.add("active");
+      modalImg.src = imgElement.src;
+      document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
     }
 
     function closeModal() {
-      document.getElementById("imgModal").style.display = "none";
+      const modal = document.getElementById("imgModal");
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto"; // Restore scrolling
     }
+
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
   </script>
 </body>
 </html>
-
-
-
-
