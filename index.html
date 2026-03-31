@@ -5,443 +5,782 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Berliner Musikfreunde - Live-Musikshows in Berlin. Erleben Sie unvergessliche Musikabende mit verschiedenen Künstlern und Stilen.">
   <title>Berliner Musikfreunde 🎶 | Live-Musikshows in Berlin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* Reset */
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #ff4e50;
-      --secondary: #f9d423;
-      --accent: #ff7e5f;
-      --light: #ffecd2;
-      --dark: #333;
-      --text: #444;
-      --white: #fff;
-      --shadow: 0 6px 20px rgba(0,0,0,0.15);
-      --radius: 18px;
+      --gold:    #f0b429;
+      --amber:   #e07b39;
+      --cream:   #fdf3e3;
+      --ink:     #0f0b07;
+      --charcoal:#1a1410;
+      --warm:    #2b1f12;
+      --muted:   #a08060;
+      --glow:    rgba(240,180,41,0.18);
+      --radius:  4px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--light), #fcb69f);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--ink);
+      color: var(--cream);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    /* Header */
+    /* ── NOISE TEXTURE OVERLAY ─────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── HEADER ────────────────────────────────────────── */
     header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: var(--white);
-      padding: 60px 20px;
-      text-align: center;
-      box-shadow: var(--shadow);
       position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
       overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, #3b2008 0%, var(--ink) 70%);
     }
 
-    header::before {
-      content: "";
+    /* Spotlight rings */
+    header::before, header::after {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-      background-size: cover;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    header::before {
+      width: 700px; height: 700px;
+      top: -180px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(240,180,41,0.12) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    header::after {
+      width: 400px; height: 400px;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(240,180,41,0.22) 0%, transparent 65%);
+      animation: pulse 4s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.7; transform: translateX(-50%) scale(1.06); }
+    }
+
+    .header-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
     }
 
     header h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 15px;
-      animation: slideIn 1s ease-in-out;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      text-shadow: 0 0 60px rgba(240,180,41,0.3);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
       position: relative;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      z-index: 1;
     }
 
-    header p {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      font-weight: 500;
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    header h1 em {
+      font-style: italic;
+      color: var(--gold);
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .header-sub {
+      margin-top: 20px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
     }
 
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
+    .header-divider {
+      margin: 30px auto 0;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.7s forwards;
     }
 
-    /* Show Cards */
-    .show-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 1.5px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(5px); }
     }
 
-    .show-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    /* ── SECTION HEADER ────────────────────────────────── */
+    .section-header {
+      text-align: center;
+      padding: 80px 20px 50px;
     }
-
-    .show-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--cream);
+      font-weight: 700;
     }
-
-    .show-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .show-content {
-      padding: 25px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .show-content h2 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: var(--primary);
-      line-height: 1.3;
-    }
-
-    .show-content p {
-      margin: 8px 0;
+    .section-header h2 span { color: var(--gold); }
+    .section-header p {
+      margin-top: 12px;
+      color: var(--muted);
       font-size: 1rem;
     }
 
-    .show-content a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: color 0.2s;
+    /* ── GRID ──────────────────────────────────────────── */
+    .cards-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
     }
 
-    .show-content a:hover {
-      color: var(--accent);
-      text-decoration: underline;
+    /* ── SHOW CARD ─────────────────────────────────────── */
+    .show-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(240,180,41,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease, border-color 0.35s ease;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .show-card:nth-child(1) { animation-delay: 0.05s; }
+    .show-card:nth-child(2) { animation-delay: 0.15s; }
+    .show-card:nth-child(3) { animation-delay: 0.25s; }
+    .show-card:nth-child(4) { animation-delay: 0.35s; }
+    .show-card:nth-child(5) { animation-delay: 0.45s; }
+
+    .show-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,180,41,0.3);
+      border-color: rgba(240,180,41,0.3);
     }
 
-    .highlight {
-      background: #ffebcc;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: bold;
-      display: inline-block;
+    /* Image wrapper */
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 230px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(.22,.68,0,1.2);
+      display: block;
+    }
+    .show-card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,7,3,0.85) 0%, transparent 55%);
+      pointer-events: none;
     }
 
-    .ticket-info {
-      margin-top: auto;
-      padding-top: 15px;
-      border-top: 1px dashed #eee;
+    .card-zoom-btn {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(240,180,41,0.15);
+      border: 1px solid rgba(240,180,41,0.4);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.25s, background 0.25s;
+      backdrop-filter: blur(4px);
+    }
+    .card-img-wrap:hover .card-zoom-btn { opacity: 1; }
+    .card-zoom-btn:hover { background: rgba(240,180,41,0.3); }
+    .card-zoom-btn svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 2; }
+
+    /* Content */
+    .card-body {
+      padding: 24px 24px 0;
+      flex-grow: 1;
+    }
+    .card-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--cream);
+      margin-bottom: 18px;
     }
 
-    .btn {
-  display: inline-block;
-  background: linear-gradient(to right, #ff9a9c, #ffbeaa);
-  color: #333;
-  padding: 12px 24px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 15px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 154, 156, 0.4);
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(255, 154, 156, 0.6);
-  text-decoration: none;
-  background: linear-gradient(to right, #ffaaaa, #ffceba);
-}
-
-    /* Footer */
-    footer {
-      background: #222;
-      color: #ccc;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 60px;
+    .card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+    .meta-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
       font-size: 0.9rem;
+      margin-top: 1px;
     }
-
-    footer a {
-      color: var(--secondary);
+    .meta-label {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 1px;
+    }
+    .meta-value {
+      color: var(--cream);
+    }
+    .meta-value a {
+      color: var(--cream);
       text-decoration: none;
+      border-bottom: 1px solid rgba(240,180,41,0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .meta-value a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
     }
 
-    footer a:hover { 
-      text-decoration: underline; 
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(240,180,41,0.1);
+      border: 1px solid rgba(240,180,41,0.25);
+      color: var(--gold);
+      padding: 3px 12px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
     }
 
-    /* Modal */
+    /* Card footer */
+    .card-footer {
+      padding: 20px 24px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 20px;
+    }
+    .card-footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .card-footer a.phone {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .card-footer a.phone:hover { color: var(--gold); }
+
+    .btn-ticket {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 13px 20px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: transform 0.25s cubic-bezier(.22,.68,0,1.2), box-shadow 0.25s ease, filter 0.25s;
+      box-shadow: 0 4px 20px rgba(240,180,41,0.25);
+    }
+    .btn-ticket:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(240,180,41,0.4);
+      filter: brightness(1.08);
+    }
+    .btn-ticket svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; flex-shrink: 0; }
+
+    /* ── CONTACT STRIP ─────────────────────────────────── */
+    .contact-strip {
+      background: var(--warm);
+      border-top: 1px solid rgba(240,180,41,0.15);
+      border-bottom: 1px solid rgba(240,180,41,0.15);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .contact-strip h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .contact-strip p { color: var(--muted); font-size: 0.92rem; margin-bottom: 20px; }
+    .contact-links {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      justify-content: center;
+    }
+    .contact-links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(240,180,41,0.3);
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-links a:hover {
+      background: rgba(240,180,41,0.1);
+      border-color: var(--gold);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(160,128,96,0.7);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* ── MODAL ─────────────────────────────────────────── */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.92);
       align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
     }
+    .modal.active { display: flex; animation: fadeIn 0.25s ease; }
 
-    .modal.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-content {
+    .modal-inner {
       position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(255,255,255,0.2);
-      animation: zoomIn 0.3s ease;
+      max-width: min(90vw, 720px);
+      animation: zoomIn 0.3s cubic-bezier(.22,.68,0,1.2);
     }
-
-    .modal img {
+    .modal-inner img {
       display: block;
       max-width: 100%;
-      max-height: 90vh;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(240,180,41,0.15);
     }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
     .modal-close {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      background: rgba(0,0,0,0.5);
-      width: 40px;
-      height: 40px;
+      top: -14px; right: -14px;
+      width: 38px; height: 38px;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1001;
-      transition: background 0.3s;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+      line-height: 1;
+    }
+    .modal-close:hover { transform: scale(1.1); background: var(--amber); }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
     }
 
-    .modal-close:hover {
-      background: rgba(0,0,0,0.8);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .show-content {
-        padding: 20px;
-      }
-      
-      header {
-        padding: 40px 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .show-content h2 {
-        font-size: 1.3rem;
-      }
-      
-      .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .contact-links { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
   <header>
-    <h1>BERLINER MUSIKFREUNDE 🎶</h1>
-    <p>Den Rhythmus des Lebens erleben</p>
-    <p>Live Shows in Berlin</p>
+    <p class="header-eyebrow">Live-Musik in Berlin</p>
+    <h1>Berliner<br><em>Musikfreunde</em></h1>
+    <p class="header-sub">Unvergessliche Abende — echte Musik — echte Menschen</p>
+    <div class="header-divider"></div>
+    <div class="scroll-hint">
+      <span>Programm</span>
+      <div class="scroll-arrow"></div>
+    </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="container">
-    
-    <!-- Show 1 -->
-    <article class="show-card">
-      <img src="flyer7.jpg" alt="Schlager ⭐ Country ⭐ Gute Laune 💫🎸" onclick="openModal(this)">
-      <div class="show-content">
-        <h2>Schlager ⭐ Country ⭐ Gute Laune mit Marion & Klaus Beyer💫🎸</h2>
-        <p><strong><span class="highlight">📍 Standort:</span> <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</a></strong></p>
-        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
-        <p>📅 <strong>Datum:</strong> 18. April 2026</p>
-        <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
-        <p><strong>Einlass:</strong> 16:00 Uhr</p>
-        <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <div class="ticket-info">
-          <p><strong>Tickets erhältlich unter:</strong></p>
-          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-          <p>oder per E-mail unter <a href="mailto: hjschippke@gmail.com"> hjschippke@gmail.com</a></p>
-          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+  <!-- ═══════════════ SHOWS ════════════════ -->
+  <section>
+    <div class="section-header">
+      <h2>Kommende <span>Shows</span></h2>
+      <p>Alle Veranstaltungen im Preußischen Landwirtshaus, Berlin</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- Card 1 -->
+      <article class="show-card">
+        <div class="card-img-wrap" onclick="openModal('flyer7.jpg')">
+          <img src="flyer7.jpg" alt="Schlager Country Gute Laune mit Marion & Klaus Beyer">
+          <div class="card-img-overlay"></div>
+          <button class="card-zoom-btn" aria-label="Flyer vergrößern">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
         </div>
-      </div>
-    </article>
-
-    <article class="show-card">
-      <img src="flyer8.jpg" alt="Veronika, der Lenz ist da! 💫🎸" onclick="openModal(this)">
-      <div class="show-content">
-        <h2>Veronika, der Lenz ist da! 💫🎸</h2>
-        <p><strong><span class="highlight">📍 Standort:</span> <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</a></strong></p>
-        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
-        <p>📅 <strong>Datum:</strong> 19. April 2026</p>
-        <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
-        <p><strong>Einlass:</strong> 16:00 Uhr</p>
-        <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <div class="ticket-info">
-          <p><strong>Tickets erhältlich unter:</strong></p>
-          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-          <p>oder per E-mail unter <a href="mailto: hjschippke@gmail.com"> hjschippke@gmail.com</a></p>
-          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        <div class="card-body">
+          <h2>Schlager ⭐ Country ⭐ Gute Laune<br>mit Marion & Klaus Beyer</h2>
+          <div class="card-meta">
+            <div class="meta-row">
+              <div class="meta-icon">📅</div>
+              <div>
+                <span class="meta-label">Datum & Zeit</span>
+                <span class="meta-value">18. April 2026 — Einlass 16:00, Beginn 17:00 Uhr</span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">📍</div>
+              <div>
+                <span class="meta-label">Ort</span>
+                <span class="meta-value"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">🎟</div>
+              <div>
+                <span class="meta-label">Eintritt</span>
+                <span class="meta-value"><span class="price-badge">23 €</span></span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </article>
-
-    <article class="show-card">
-      <img src="flyer9.jpg" alt="DIE Kay Dörfel SHOW" onclick="openModal(this)">
-      <div class="show-content">
-        <h2>DIE Kay Dörfel SHOW 🎸</h2>
-        <p><strong><span class="highlight">📍 Standort:</span> <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</a></strong></p>
-        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
-        <p>📅 <strong>Datum:</strong> 16. Mai 2026</p>
-        <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
-        <p><strong>Einlass:</strong> 16:00 Uhr</p>
-        <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <div class="ticket-info">
-          <p><strong>Tickets erhältlich unter:</strong></p>
-          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-          <p>oder per E-mail unter <a href="mailto: hjschippke@gmail.com"> hjschippke@gmail.com</a></p>
-          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        <div class="card-footer">
+          <p>Tickets & Reservierung</p>
+          <a href="tel:+4917679212777" class="phone">+49 176 79212777</a>
+          <a href="tel:+4917679212777" class="btn-ticket">
+            <svg viewBox="0 0 24 24"><path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 0-4V8z"/></svg>
+            Jetzt Ticket reservieren
+          </a>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <article class="show-card">
-      <img src="flyer6.jpg" alt="URKNALL ZWO: Vicky & Co 💫🎸" onclick="openModal(this)">
-      <div class="show-content">
-        <h2>URKNALL ZWO: Vicky & Co 💫🎸</h2>
-        <p><strong><span class="highlight">📍 Standort:</span> <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</a></strong></p>
-        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
-        <p>📅 <strong>Datum:</strong> 17. Mai 2026</p>
-        <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
-        <p><strong>Einlass:</strong> 16:00 Uhr</p>
-        <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <div class="ticket-info">
-          <p><strong>Tickets erhältlich unter:</strong></p>
-          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-          <p>oder per E-mail unter <a href="mailto: hjschippke@gmail.com"> hjschippke@gmail.com</a></p>
-          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+      <!-- Card 2 -->
+      <article class="show-card">
+        <div class="card-img-wrap" onclick="openModal('flyer8.jpg')">
+          <img src="flyer8.jpg" alt="Veronika der Lenz ist da">
+          <div class="card-img-overlay"></div>
+          <button class="card-zoom-btn" aria-label="Flyer vergrößern">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
         </div>
-      </div>
-    </article>
-
-    <article class="show-card">
-        <img src="flyer10.jpg" alt="Wirtschaftswunderland mit GERDA BUCHHOLZ & BENNO RADKE💫" onclick="openModal(this)">
-      <div class="show-content">
-        <h2>Wirtschaftswunderland mit GERDA BUCHHOLZ & BENNO RADKE💫</h2>
-        <p><strong><span class="highlight">📍 Standort:</span> <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin</a></strong></p>
-        <p><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin/@52.5104251,13.1580746,15474m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x47a8571976beb6b3:0x9833c7a3a7d98262!2m2!1d13.2404826!2d52.5104917?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" aria-label="Öffne Standort in Google Maps">📍 Google Maps anzeigen</a></p>
-        <p>📅 <strong>Datum:</strong> 21. Juni 2026</p>
-        <p><strong>Eintritt:</strong> <span class="highlight">23 €</span></p>
-        <p><strong>Einlass:</strong> 16:00 Uhr</p>
-        <p><strong>Beginn:</strong> 17:00 Uhr</p>
-        <div class="ticket-info">
-          <p><strong>Tickets erhältlich unter:</strong></p>
-          <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-          <p>oder per E-mail unter <a href="mailto: hjschippke@gmail.com"> hjschippke@gmail.com</a></p>
-          <a href="tel:+4917679212777" class="btn">Jetzt Tickets reservieren</a>
+        <div class="card-body">
+          <h2>Veronika, der Lenz ist da! 💫🎸</h2>
+          <div class="card-meta">
+            <div class="meta-row">
+              <div class="meta-icon">📅</div>
+              <div>
+                <span class="meta-label">Datum & Zeit</span>
+                <span class="meta-value">19. April 2026 — Einlass 16:00, Beginn 17:00 Uhr</span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">📍</div>
+              <div>
+                <span class="meta-label">Ort</span>
+                <span class="meta-value"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">🎟</div>
+              <div>
+                <span class="meta-label">Eintritt</span>
+                <span class="meta-value"><span class="price-badge">23 €</span></span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </article>
+        <div class="card-footer">
+          <p>Tickets & Reservierung</p>
+          <a href="tel:+4917679212777" class="phone">+49 176 79212777</a>
+          <a href="tel:+4917679212777" class="btn-ticket">
+            <svg viewBox="0 0 24 24"><path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 0-4V8z"/></svg>
+            Jetzt Ticket reservieren
+          </a>
+        </div>
+      </article>
 
-    
-  </main>
+      <!-- Card 3 -->
+      <article class="show-card">
+        <div class="card-img-wrap" onclick="openModal('flyer9.jpg')">
+          <img src="flyer9.jpg" alt="Die Kay Dörfel Show">
+          <div class="card-img-overlay"></div>
+          <button class="card-zoom-btn" aria-label="Flyer vergrößern">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <h2>DIE Kay Dörfel SHOW 🎸</h2>
+          <div class="card-meta">
+            <div class="meta-row">
+              <div class="meta-icon">📅</div>
+              <div>
+                <span class="meta-label">Datum & Zeit</span>
+                <span class="meta-value">16. Mai 2026 — Einlass 16:00, Beginn 17:00 Uhr</span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">📍</div>
+              <div>
+                <span class="meta-label">Ort</span>
+                <span class="meta-value"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">🎟</div>
+              <div>
+                <span class="meta-label">Eintritt</span>
+                <span class="meta-value"><span class="price-badge">23 €</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>Tickets & Reservierung</p>
+          <a href="tel:+4917679212777" class="phone">+49 176 79212777</a>
+          <a href="tel:+4917679212777" class="btn-ticket">
+            <svg viewBox="0 0 24 24"><path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 0-4V8z"/></svg>
+            Jetzt Ticket reservieren
+          </a>
+        </div>
+      </article>
 
-  <!-- Image Modal -->
-  <div id="imgModal" class="modal" onclick="closeModal()">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-      <img id="modalImg" src="" alt="Vergrößerte Ansicht des Veranstaltungsflyers">
+      <!-- Card 4 -->
+      <article class="show-card">
+        <div class="card-img-wrap" onclick="openModal('flyer6.jpg')">
+          <img src="flyer6.jpg" alt="URKNALL ZWO Vicky und Co">
+          <div class="card-img-overlay"></div>
+          <button class="card-zoom-btn" aria-label="Flyer vergrößern">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <h2>URKNALL ZWO: Vicky & Co 💫🎸</h2>
+          <div class="card-meta">
+            <div class="meta-row">
+              <div class="meta-icon">📅</div>
+              <div>
+                <span class="meta-label">Datum & Zeit</span>
+                <span class="meta-value">17. Mai 2026 — Einlass 16:00, Beginn 17:00 Uhr</span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">📍</div>
+              <div>
+                <span class="meta-label">Ort</span>
+                <span class="meta-value"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">🎟</div>
+              <div>
+                <span class="meta-label">Eintritt</span>
+                <span class="meta-value"><span class="price-badge">23 €</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>Tickets & Reservierung</p>
+          <a href="tel:+4917679212777" class="phone">+49 176 79212777</a>
+          <a href="tel:+4917679212777" class="btn-ticket">
+            <svg viewBox="0 0 24 24"><path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 0-4V8z"/></svg>
+            Jetzt Ticket reservieren
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="show-card">
+        <div class="card-img-wrap" onclick="openModal('flyer10.jpg')">
+          <img src="flyer10.jpg" alt="Wirtschaftswunderland mit Gerda Buchholz und Benno Radke">
+          <div class="card-img-overlay"></div>
+          <button class="card-zoom-btn" aria-label="Flyer vergrößern">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <h2>Wirtschaftswunderland<br>mit GERDA BUCHHOLZ & BENNO RADKE 💫</h2>
+          <div class="card-meta">
+            <div class="meta-row">
+              <div class="meta-icon">📅</div>
+              <div>
+                <span class="meta-label">Datum & Zeit</span>
+                <span class="meta-value">21. Juni 2026 — Einlass 16:00, Beginn 17:00 Uhr</span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">📍</div>
+              <div>
+                <span class="meta-label">Ort</span>
+                <span class="meta-value"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus, Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-icon">🎟</div>
+              <div>
+                <span class="meta-label">Eintritt</span>
+                <span class="meta-value"><span class="price-badge">23 €</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>Tickets & Reservierung</p>
+          <a href="tel:+4917679212777" class="phone">+49 176 79212777</a>
+          <a href="tel:+4917679212777" class="btn-ticket">
+            <svg viewBox="0 0 24 24"><path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 0-4V8z"/></svg>
+            Jetzt Ticket reservieren
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ CONTACT STRIP ════════ -->
+  <div class="contact-strip">
+    <h3>Fragen oder Gruppenreservierungen?</h3>
+    <p>Wir freuen uns auf Ihre Nachricht — per Telefon oder E-Mail</p>
+    <div class="contact-links">
+      <a href="tel:+4917679212777">📞 +49 176 79212777</a>
+      <a href="mailto:hjschippke@gmail.com">✉️ hjschippke@gmail.com</a>
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- ═══════════════ FOOTER ════════════════ -->
   <footer>
-    <p>© 2025 Berliner Musikfreunde | Mit ❤️ für Musikliebhaber entwickelt</p>
-    <p>Kontakt: <a href="tel:+4917679212777">+49 176 79212777</a></p>
+    <span class="footer-logo">Berliner Musikfreunde 🎶</span>
+    <p>© 2026 Berliner Musikfreunde — Mit ❤️ für Musikliebhaber gestaltet</p>
+    <p style="margin-top:6px;"><a href="tel:+4917679212777">+49 176 79212777</a></p>
   </footer>
 
+  <!-- ═══════════════ MODAL ═════════════════ -->
+  <div id="imgModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal()" aria-label="Schließen">✕</button>
+      <img id="modalImg" src="" alt="Flyer vergrößert">
+    </div>
+  </div>
+
   <script>
-    function openModal(imgElement) {
-      const modal = document.getElementById("imgModal");
-      const modalImg = document.getElementById("modalImg");
-      
-      modal.classList.add("active");
-      modalImg.src = imgElement.src;
-      document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    function openModal(src) {
+      const modal = document.getElementById('imgModal');
+      document.getElementById('modalImg').src = src;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-
-    function closeModal() {
-      const modal = document.getElementById("imgModal");
-      modal.classList.remove("active");
-      document.body.style.overflow = "auto"; // Restore scrolling
+    function closeModal(e) {
+      if (e && e.target !== document.getElementById('imgModal') && !e.target.classList.contains('modal-close')) return;
+      document.getElementById('imgModal').classList.remove('active');
+      document.body.style.overflow = '';
     }
-
-    // Close modal when pressing Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('imgModal').classList.remove('active'); document.body.style.overflow = ''; } });
   </script>
 </body>
 </html>
-
 
 
 
