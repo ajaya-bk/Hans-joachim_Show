@@ -3,564 +3,1127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Berliner Musikfreunde - Live-Musikshows in Berlin. Erleben Sie unvergessliche Musikabende mit verschiedenen Künstlern und Stilen.">
-  <title>Berliner Musikfreunde 🎶 | Live-Musikshows in Berlin</title>
+  <meta name="description" content="Berliner Musikfreunde – Live-Musikshows im Preußischen Landwirtshaus Berlin. Schlager, Country und Volksmusik live erleben.">
+  <title>Berliner Musikfreunde 🎶 | Live-Shows in Berlin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ══════════════════════════════════════════════════
+     TOKENS
+  ══════════════════════════════════════════════════ */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-    :root {
-      --rose:    #c0392b;
-      --rose-lt: #e8574a;
-      --rose-bg: #fdf0ee;
-      --gold:    #c8922a;
-      --gold-lt: #f0d080;
-      --cream:   #fdf8f0;
-      --warm:    #f5ebe0;
-      --brown:   #5c3d2e;
-      --text:    #2e1f14;
-      --muted:   #8a6a5a;
-      --border:  #e0c8b8;
-      --white:   #ffffff;
-    }
+  :root {
+    --bg:        #fef9f1;
+    --bg2:       #f7ead4;
+    --bg3:       #f0ddb8;
+    --wine:      #7B1818;
+    --wine-mid:  #9B2323;
+    --wine-lt:   #BE3030;
+    --gold:      #A97520;
+    --gold-lt:   #C9942A;
+    --gold-pale: #F5E5B8;
+    --text:      #1A0E07;
+    --text2:     #5C3520;
+    --muted:     #9A7260;
+    --border:    #D8C4A0;
+    --white:     #FFFDF8;
+    --shadow-sm: 0 2px 12px rgba(90,40,10,.10);
+    --shadow-md: 0 6px 28px rgba(90,40,10,.15);
+    --shadow-lg: 0 16px 56px rgba(90,40,10,.20);
+    --r:         14px;
+  }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      font-family: 'Source Serif 4', Georgia, serif;
-      background-color: var(--cream);
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(192,57,43,0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(200,146,42,0.07) 0%, transparent 40%);
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.7;
-    }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 20px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
 
-    /* ── HEADER ──────────────────────────────────────── */
-    header {
-      background: var(--rose);
-      background-image: linear-gradient(160deg, #b03020 0%, #c0392b 45%, #a52714 100%);
-      color: white;
-      text-align: center;
-      padding: 56px 24px 52px;
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 40px;
-      background: var(--cream);
-      clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    }
+  /* ══════════════════════════════════════════════════
+     STICKY TOP PHONE BAR
+  ══════════════════════════════════════════════════ */
+  .phone-bar {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: var(--wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 24px;
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 3px 14px rgba(0,0,0,.22);
+    flex-wrap: wrap;
+  }
+  .phone-bar .pb-label {
+    font-weight: 400;
+    opacity: .85;
+    font-size: .9rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .phone-bar a {
+    color: var(--gold-pale);
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: .04em;
+    transition: color .2s;
+  }
+  .phone-bar a:hover { color: #fff; }
+  .pb-cta {
+    background: var(--gold-lt);
+    color: var(--wine) !important;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .06em;
+    transition: background .2s, transform .2s !important;
+  }
+  .pb-cta:hover { background: var(--gold-pale) !important; transform: scale(1.04) !important; }
 
-    .header-notes {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .note {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0.12;
-      animation: floatNote 6s ease-in-out infinite;
-    }
-    .note:nth-child(1) { top: 10%; left: 8%;   animation-delay: 0s; }
-    .note:nth-child(2) { top: 20%; right: 10%;  animation-delay: 1.2s; font-size: 1.5rem; }
-    .note:nth-child(3) { bottom: 20%; left: 14%;animation-delay: 2.4s; font-size: 1.4rem; }
-    .note:nth-child(4) { top: 40%; right: 6%;   animation-delay: 0.8s; font-size: 1.8rem; }
-    .note:nth-child(5) { bottom: 28%; right: 18%;animation-delay: 3s; }
-    @keyframes floatNote {
-      0%,100% { transform: translateY(0) rotate(-5deg); }
-      50%      { transform: translateY(-10px) rotate(5deg); }
-    }
+  /* ══════════════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════════════ */
+  .hero {
+    background: var(--wine);
+    background-image:
+      radial-gradient(ellipse 70% 90% at 50% 0%, #a02020 0%, var(--wine) 55%, #4a0e0e 100%);
+    color: #fff;
+    text-align: center;
+    padding: 70px 24px 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Warm glow orb */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(200,148,42,.25) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  /* Decorative bottom wave */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 52px;
+    background: var(--bg);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
 
-    .header-ornament {
-      font-size: 1.4rem;
-      letter-spacing: 0.5em;
-      opacity: 0.7;
-      margin-bottom: 14px;
-      display: block;
-      animation: fadeDown 0.8s ease 0.1s both;
-    }
-    header h1 {
-      font-family: 'Lora', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      text-shadow: 2px 3px 8px rgba(0,0,0,0.25);
-      animation: fadeDown 0.9s ease 0.2s both;
-      margin-bottom: 12px;
-    }
-    .header-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      font-weight: 300;
-      opacity: 0.9;
-      letter-spacing: 0.05em;
-      animation: fadeDown 0.9s ease 0.35s both;
-      margin-bottom: 18px;
-    }
-    .header-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      opacity: 0.6;
-      animation: fadeDown 0.9s ease 0.45s both;
-    }
-    .header-divider::before,.header-divider::after {
-      content: ''; width: 60px; height: 1px; background: white;
-    }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+  /* Floating notes */
+  .hero-notes span {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: .10;
+    animation: floatUp 8s ease-in-out infinite;
+    user-select: none;
+  }
+  .hero-notes span:nth-child(1) { left:5%;  top:15%; animation-delay:0s; }
+  .hero-notes span:nth-child(2) { left:12%; top:60%; animation-delay:1.5s; font-size:1.2rem; }
+  .hero-notes span:nth-child(3) { left:88%; top:20%; animation-delay:2.8s; font-size:1.5rem; }
+  .hero-notes span:nth-child(4) { left:92%; top:65%; animation-delay:0.8s; }
+  .hero-notes span:nth-child(5) { left:50%; top:8%;  animation-delay:3.5s; font-size:1.1rem; }
+  @keyframes floatUp {
+    0%,100% { transform: translateY(0) rotate(-6deg); }
+    50%      { transform: translateY(-16px) rotate(6deg); }
+  }
 
-    /* ── SECTION INTRO ─────────────────────────────── */
-    .section-intro {
-      text-align: center;
-      padding: 56px 24px 36px;
-    }
-    .section-intro h2 {
-      font-family: 'Lora', Georgia, serif;
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      color: var(--rose);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .section-intro p { color: var(--muted); font-size: 1.1rem; }
-    .ornament-line {
-      display: flex; align-items: center; justify-content: center;
-      gap: 14px; margin: 18px auto 0; color: var(--gold); font-size: 1.1rem;
-    }
-    .ornament-line::before,.ornament-line::after {
-      content: ''; width: 80px; height: 1.5px;
-      background: linear-gradient(to right, transparent, var(--gold));
-    }
-    .ornament-line::after { background: linear-gradient(to left, transparent, var(--gold)); }
+  .hero-eyebrow {
+    font-size: .8rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeSlide .8s ease .2s forwards;
+    display: block;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7.5vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -.02em;
+    text-shadow: 0 2px 30px rgba(0,0,0,.35);
+    opacity: 0;
+    animation: fadeSlide .9s ease .35s forwards;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .hero h1 em { color: var(--gold-lt); font-style: italic; }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeSlide .9s ease .5s forwards;
+    max-width: 600px;
+    margin: 14px auto 0;
+    color: rgba(255,255,255,.85);
+    line-height: 1.6;
+    position: relative;
+  }
+  .hero-ornament {
+    margin: 24px auto;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    opacity: 0;
+    animation: fadeSlide .9s ease .65s forwards;
+    position: relative;
+  }
+  .hero-ornament::before,.hero-ornament::after {
+    content: ''; flex: 1; max-width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,148,42,.6));
+  }
+  .hero-ornament::after { background: linear-gradient(to left, transparent, rgba(200,148,42,.6)); }
+  .hero-ornament span { color: var(--gold-lt); font-size: .9rem; letter-spacing: .2em; }
 
-    /* ── CARDS GRID ────────────────────────────────── */
-    .cards-grid {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 32px;
-    }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--gold-lt);
+    background-image: linear-gradient(135deg, var(--gold-lt), #b87020);
+    color: var(--wine);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    padding: 17px 40px; border-radius: 50px;
+    text-decoration: none; letter-spacing: .03em;
+    box-shadow: 0 6px 28px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.25);
+    transition: transform .25s, box-shadow .25s, filter .25s;
+    opacity: 0;
+    animation: fadeSlide .9s ease .8s forwards;
+    position: relative;
+  }
+  .hero-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 36px rgba(0,0,0,.35);
+    filter: brightness(1.08);
+  }
 
-    /* ── SHOW CARD ─────────────────────────────────── */
-    .show-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 18px rgba(92,61,46,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      animation: riseUp 0.7s ease forwards;
-    }
-    .show-card:nth-child(1) { animation-delay: 0.05s; }
-    .show-card:nth-child(2) { animation-delay: 0.15s; }
-    .show-card:nth-child(3) { animation-delay: 0.25s; }
-    .show-card:nth-child(4) { animation-delay: 0.35s; }
-    .show-card:nth-child(5) { animation-delay: 0.45s; }
-    @keyframes riseUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .show-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 36px rgba(192,57,43,0.15), 0 0 0 2px rgba(192,57,43,0.15);
-    }
+  @keyframes fadeSlide {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
 
-    .card-img-wrap {
-      position: relative; height: 240px; overflow: hidden;
-      cursor: pointer; flex-shrink: 0;
-    }
-    .card-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease; display: block;
-    }
-    .show-card:hover .card-img-wrap img { transform: scale(1.04); }
+  /* ══════════════════════════════════════════════════
+     QUICK DATES STRIP
+  ══════════════════════════════════════════════════ */
+  .dates-strip {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    padding: 22px 24px;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .dates-strip-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dates-strip-label {
+    font-size: .78rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; margin-right: 6px;
+  }
+  .date-pill {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    color: var(--text2);
+    padding: 7px 18px;
+    border-radius: 30px;
+    font-family: 'Lora', serif;
+    font-size: .95rem; font-weight: 700;
+    white-space: nowrap;
+    transition: background .2s, border-color .2s, color .2s;
+    cursor: default;
+  }
+  .date-pill.past {
+    opacity: .45;
+    text-decoration: line-through;
+    background: transparent;
+  }
+  .date-pill.next {
+    background: var(--wine);
+    border-color: var(--wine);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(123,24,24,.3);
+  }
+  .date-pill-dot { color: var(--gold); font-size: .7rem; }
 
-    .zoom-hint {
-      position: absolute; inset: 0;
-      background: rgba(192,57,43,0);
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.3s;
-    }
-    .card-img-wrap:hover .zoom-hint { background: rgba(192,57,43,0.15); }
-    .zoom-hint span {
-      background: white; color: var(--rose);
-      padding: 8px 16px; border-radius: 30px;
-      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
-      opacity: 0; transform: scale(0.9);
-      transition: opacity 0.25s, transform 0.25s; pointer-events: none;
-    }
-    .card-img-wrap:hover .zoom-hint span { opacity: 1; transform: scale(1); }
+  /* ══════════════════════════════════════════════════
+     NEXT SHOW SPOTLIGHT
+  ══════════════════════════════════════════════════ */
+  .spotlight {
+    max-width: 860px;
+    margin: 56px auto 0;
+    padding: 0 24px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .spotlight.visible { opacity:1; transform:translateY(0); }
 
-    .date-banner {
-      background: var(--rose);
-      background-image: linear-gradient(135deg, #c0392b 0%, #a52714 100%);
-      color: white;
-      text-align: center;
-      padding: 16px 20px;
-      font-family: 'Lora', serif;
-      font-size: 1.55rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      border-bottom: 3px solid rgba(0,0,0,0.12);
-    }
+  .spotlight-inner {
+    background: var(--white);
+    border: 2px solid var(--wine);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .spotlight-badge {
+    grid-column: 1 / -1;
+    background: var(--wine);
+    background-image: linear-gradient(90deg, #7B1818, #9B2323, #7B1818);
+    color: #fff;
+    text-align: center;
+    padding: 12px 20px;
+    font-family: 'Lora', serif;
+    font-size: .85rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .spotlight-badge span { color: var(--gold-pale); }
 
-    .card-body { padding: 24px 26px 0; flex-grow: 1; }
-    .card-body h2 {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 1.22rem; font-weight: 700; line-height: 1.4;
-      color: var(--rose); margin-bottom: 18px;
-      border-bottom: 1.5px dashed var(--border); padding-bottom: 14px;
-    }
+  .spotlight-left {
+    padding: 32px 28px 32px 32px;
+    display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    border-right: 1px dashed var(--border);
+  }
+  .spotlight-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--wine); line-height: 1.1;
+  }
+  .spotlight-date small { display: block; font-size: .95rem; font-weight: 400; color: var(--muted); font-family: 'Lora', serif; }
+  .spotlight-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; line-height: 1.3; color: var(--text);
+  }
+  .spotlight-detail { font-size: .95rem; color: var(--text2); }
+  .spotlight-detail strong { color: var(--wine); }
 
-    .info-rows { display: flex; flex-direction: column; gap: 11px; }
-    .info-row { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; }
-    .info-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; width: 24px; text-align: center; }
-    .info-text { line-height: 1.4; }
-    .info-label {
-      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
-      font-weight: 600; color: var(--muted); display: block; margin-bottom: 1px;
-    }
-    .info-text a {
-      color: var(--brown); text-decoration: underline;
-      text-underline-offset: 3px; text-decoration-color: var(--border);
-      font-size: 0.95rem; transition: color 0.2s;
-    }
-    .info-text a:hover { color: var(--rose); text-decoration-color: var(--rose); }
+  .spotlight-countdown {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .cd-block {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 16px;
+    min-width: 64px;
+  }
+  .cd-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--wine); line-height: 1;
+    display: block;
+  }
+  .cd-label {
+    font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; display: block; margin-top: 3px;
+  }
 
-    .price-tag {
-      display: inline-block;
-      background: var(--rose-bg); color: var(--rose);
-      font-family: 'Lora', serif; font-weight: 700; font-size: 1.3rem;
-      padding: 2px 14px; border-radius: 6px;
-      border: 1.5px solid rgba(192,57,43,0.2);
-    }
+  .spotlight-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--wine);
+    background-image: linear-gradient(135deg, var(--wine-mid), var(--wine));
+    color: #fff; font-family: 'Lora', serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .04em;
+    padding: 14px 28px; border-radius: 10px; text-decoration: none;
+    box-shadow: 0 4px 18px rgba(123,24,24,.35);
+    transition: transform .25s, box-shadow .25s, filter .25s;
+    margin-top: 4px; align-self: flex-start;
+  }
+  .spotlight-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(123,24,24,.45); filter: brightness(1.1); }
 
-    .times-row { display: flex; gap: 14px; margin-top: 2px; }
-    .time-chip {
-      background: var(--warm); border: 1px solid var(--border);
-      border-radius: 20px; padding: 3px 12px;
-      font-size: 0.9rem; color: var(--brown);
-    }
-    .time-chip strong { color: var(--text); }
+  .spotlight-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px; background: var(--bg2);
+  }
+  .spotlight-right img {
+    width: 100%; max-width: 260px; height: auto;
+    border-radius: 10px; box-shadow: var(--shadow-md);
+    display: block; cursor: pointer;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .spotlight-right img:hover { transform: scale(1.03); box-shadow: var(--shadow-lg); }
 
-    .card-footer {
-      padding: 20px 26px 24px; margin-top: 20px;
-      background: var(--warm); border-top: 1.5px dashed var(--border);
-    }
-    .contact-line { font-size: 1rem; color: var(--muted); margin-bottom: 6px; }
-    .phone-link {
-      font-size: 1.2rem; font-weight: 700; color: var(--brown);
-      text-decoration: none; letter-spacing: 0.02em;
-    }
-    .phone-link:hover { color: var(--rose); }
-    .email-link {
-      font-size: 0.95rem; color: var(--muted); text-decoration: none; display: block; margin-top: 2px;
-    }
-    .email-link:hover { color: var(--rose); }
+  /* ══════════════════════════════════════════════════
+     SECTION HEADING
+  ══════════════════════════════════════════════════ */
+  .section-head {
+    text-align: center;
+    padding: 70px 24px 40px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--wine);
+    line-height: 1.15; margin-bottom: 10px;
+  }
+  .section-head p { color: var(--muted); font-size: 1rem; }
+  .deco-rule {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin: 18px auto 0; font-size: .85rem; color: var(--gold);
+  }
+  .deco-rule::before,.deco-rule::after {
+    content: ''; width: 100px; height: 1.5px; max-width: 80px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .deco-rule::after { background: linear-gradient(to left, transparent, var(--gold)); }
 
-    .btn-ticket {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      margin-top: 14px; padding: 15px 22px;
-      background: var(--rose);
-      background-image: linear-gradient(135deg, #c0392b 0%, #a52714 100%);
-      color: white;
-      font-family: 'Lora', Georgia, serif; font-size: 1.05rem; font-weight: 700;
-      letter-spacing: 0.03em; text-decoration: none; border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(192,57,43,0.3);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s;
-    }
-    .btn-ticket:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(192,57,43,0.4); filter: brightness(1.08);
-    }
+  /* ══════════════════════════════════════════════════
+     CARDS GRID
+  ══════════════════════════════════════════════════ */
+  .cards-grid {
+    max-width: 1240px; margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 36px;
+  }
 
-    /* ── VENUE SECTION ─────────────────────────────── */
-    .venue-section {
-      background: var(--rose);
-      background-image: linear-gradient(135deg, #b03020 0%, #c0392b 60%, #a52714 100%);
-      color: white; padding: 52px 24px; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .venue-section::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 40px;
-      background: var(--cream); clip-path: polygon(0 0, 100% 0, 0 100%);
-    }
-    .venue-section h3 {
-      font-family: 'Lora', Georgia, serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
-      margin-bottom: 10px; margin-top: 20px;
-    }
-    .venue-section p { font-size: 1.1rem; opacity: 0.9; max-width: 500px; margin: 0 auto 24px; }
-    .venue-contacts { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
-    .venue-contact-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5);
-      color: white; font-size: 1.05rem; font-weight: 600;
-      padding: 13px 24px; border-radius: 10px; text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .venue-contact-btn:hover { background: rgba(255,255,255,0.25); border-color: white; }
+  /* ── CARD ───────────────────────────────────────── */
+  .show-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: transform .35s cubic-bezier(.22,.68,0,1.2), box-shadow .35s ease;
+    opacity: 0; transform: translateY(32px);
+    transition: opacity .65s ease, transform .65s ease, box-shadow .3s ease;
+    position: relative;
+  }
+  .show-card.visible { opacity:1; transform:translateY(0); }
+  .show-card.visible:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), 0 0 0 2px rgba(123,24,24,.18);
+  }
+  .show-card.past-show { opacity: .6; filter: grayscale(.4); }
+  .show-card.past-show:hover { transform: translateY(-3px); }
 
-    /* ── FOOTER ─────────────────────────────────────── */
-    footer {
-      background: var(--brown); color: rgba(255,255,255,0.75);
-      text-align: center; padding: 36px 24px;
-      font-size: 0.95rem; line-height: 1.8;
-    }
-    footer .footer-title {
-      font-family: 'Lora', serif; font-size: 1.3rem;
-      color: white; display: block; margin-bottom: 8px;
-    }
-    footer a { color: var(--gold-lt); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+  /* "Nächste Show" glow ring */
+  .show-card.is-next {
+    border-color: var(--wine);
+    box-shadow: 0 0 0 3px rgba(123,24,24,.15), var(--shadow-md);
+  }
+  .next-badge {
+    display: none;
+    position: absolute; top: 14px; right: 14px; z-index: 10;
+    background: var(--gold-lt);
+    color: var(--wine);
+    font-family: 'Lora', serif; font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  }
+  .show-card.is-next .next-badge { display: block; }
 
-    /* ── MODAL ──────────────────────────────────────── */
-    .modal {
-      display: none; position: fixed; inset: 0; z-index: 10000;
-      background: rgba(20,8,4,0.88);
-      align-items: center; justify-content: center; padding: 20px;
-      backdrop-filter: blur(5px);
-    }
-    .modal.active { display: flex; animation: fadeIn 0.2s ease; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  /* Past overlay */
+  .past-overlay {
+    display: none;
+    position: absolute; top: 14px; left: 14px; z-index: 10;
+    background: rgba(30,10,5,.7);
+    color: rgba(255,255,255,.85);
+    font-family: 'Lora', serif; font-size: .72rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .show-card.past-show .past-overlay { display: block; }
 
-    .modal-inner {
-      position: relative;
-      animation: popIn 0.3s cubic-bezier(.22,.68,0,1.3);
-    }
-    @keyframes popIn {
-      from { transform: scale(0.88); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
-    }
-    .modal-inner img {
-      display: block; max-width: min(88vw, 700px); max-height: 88vh;
-      border-radius: 12px; object-fit: contain;
-      box-shadow: 0 0 60px rgba(0,0,0,0.5);
-    }
-    .modal-close {
-      position: absolute; top: -14px; right: -14px;
-      width: 40px; height: 40px; background: var(--rose);
-      color: white; border: none; border-radius: 50%;
-      font-size: 1.3rem; font-weight: 700; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s, background 0.2s;
-    }
-    .modal-close:hover { transform: scale(1.1); background: var(--rose-lt); }
+  /* DATE BANNER */
+  .date-banner {
+    background: var(--wine);
+    background-image: linear-gradient(135deg, var(--wine-mid) 0%, var(--wine) 100%);
+    color: #fff;
+    text-align: center;
+    padding: 18px 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem; font-weight: 900;
+    letter-spacing: .02em;
+    text-shadow: 0 1px 4px rgba(0,0,0,.25);
+    border-bottom: 3px solid rgba(0,0,0,.15);
+    line-height: 1.1;
+  }
+  .date-banner .day-of-week {
+    display: block;
+    font-family: 'Lora', serif;
+    font-size: .8rem; font-weight: 400;
+    letter-spacing: .18em; text-transform: uppercase;
+    opacity: .8; margin-bottom: 2px;
+  }
 
-    /* ── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 700px) {
-      .cards-grid { grid-template-columns: 1fr; gap: 24px; }
-      .venue-contacts { flex-direction: column; align-items: center; }
-      .card-body { padding: 20px 20px 0; }
-      .card-footer { padding: 18px 20px 20px; }
-      .times-row { flex-wrap: wrap; }
-    }
+  /* FLYER IMAGE */
+  .card-flyer { overflow: hidden; flex-shrink: 0; background: var(--bg2); }
+  .card-flyer img {
+    width: 100%; height: auto; display: block;
+    transition: transform .5s ease;
+  }
+  .show-card:hover .card-flyer img { transform: scale(1.02); }
+
+  /* ZOOM BUTTON */
+  .zoom-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 15px 20px;
+    background: var(--bg2);
+    border: none; border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border);
+    color: var(--wine);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .04em;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .zoom-btn:hover { background: var(--gold-pale); color: var(--wine-mid); }
+  .zoom-btn .zi { font-size: 1.2rem; }
+
+  /* CARD BODY */
+  .card-body { padding: 26px 28px 0; flex-grow: 1; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 700; line-height: 1.35;
+    color: var(--text); margin-bottom: 20px;
+    border-bottom: 1.5px dashed var(--border); padding-bottom: 16px;
+  }
+  .info-list { display: flex; flex-direction: column; gap: 13px; }
+  .info-item { display: flex; align-items: flex-start; gap: 13px; }
+  .info-emoji { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; width: 26px; text-align: center; }
+  .info-block { flex: 1; }
+  .info-lbl {
+    display: block; font-size: .72rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+  }
+  .info-val { font-size: 1rem; color: var(--text); line-height: 1.4; }
+  .info-val a {
+    color: var(--text2); text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: var(--border);
+    transition: color .2s, text-decoration-color .2s;
+  }
+  .info-val a:hover { color: var(--wine); text-decoration-color: var(--wine); }
+  .price-tag {
+    display: inline-block;
+    background: var(--gold-pale); color: var(--wine);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900;
+    padding: 2px 16px; border-radius: 8px;
+    border: 1.5px solid rgba(169,117,32,.3);
+  }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+  .chip {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 24px; padding: 4px 14px;
+    font-size: .9rem; color: var(--text2); font-weight: 600;
+  }
+
+  /* CARD FOOTER */
+  .card-footer {
+    padding: 22px 28px 26px; margin-top: 22px;
+    background: var(--bg2);
+    border-top: 1.5px dashed var(--border);
+  }
+  .cf-label { font-size: .8rem; color: var(--muted); font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .cf-phone {
+    display: block; font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--wine);
+    text-decoration: none; line-height: 1.2;
+    transition: color .2s;
+  }
+  .cf-phone:hover { color: var(--wine-lt); }
+  .cf-email {
+    display: block; font-size: .95rem; color: var(--muted);
+    text-decoration: none; margin-top: 3px;
+    transition: color .2s;
+  }
+  .cf-email:hover { color: var(--wine); }
+  .book-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 16px; padding: 17px 22px;
+    background: var(--wine);
+    background-image: linear-gradient(135deg, #be3030, #7B1818);
+    color: #fff;
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+    letter-spacing: .03em; text-decoration: none; border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(123,24,24,.35);
+    transition: transform .25s, box-shadow .25s, filter .25s;
+  }
+  .book-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(123,24,24,.45); filter: brightness(1.1);
+  }
+
+  /* ══════════════════════════════════════════════════
+     WHY US
+  ══════════════════════════════════════════════════ */
+  .why-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 70px 24px;
+  }
+  .why-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px; margin-top: 44px;
+  }
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px 24px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .why-card.visible { opacity:1; transform:translateY(0); }
+  .why-icon { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+  .why-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--wine);
+    margin-bottom: 8px;
+  }
+  .why-card p { font-size: .95rem; color: var(--text2); line-height: 1.55; }
+
+  /* ══════════════════════════════════════════════════
+     CONTACT SECTION
+  ══════════════════════════════════════════════════ */
+  .contact-section {
+    text-align: center;
+    padding: 80px 24px;
+    background: var(--wine);
+    background-image: linear-gradient(160deg, #a02020 0%, var(--wine) 50%, #4a0e0e 100%);
+    color: #fff;
+    position: relative; overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 52px;
+    background: var(--bg);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+  .contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900;
+    margin-bottom: 10px; margin-top: 24px;
+  }
+  .contact-section > p { font-size: 1.1rem; opacity: .88; max-width: 480px; margin: 0 auto 36px; }
+  .contact-phone-big {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 900;
+    color: var(--gold-pale);
+    text-decoration: none; letter-spacing: .03em;
+    text-shadow: 0 2px 20px rgba(0,0,0,.3);
+    margin-bottom: 20px;
+    transition: color .2s;
+  }
+  .contact-phone-big:hover { color: #fff; }
+  .contact-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.4);
+    color: #fff; font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600;
+    padding: 14px 28px; border-radius: 10px; text-decoration: none;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .contact-btn:hover {
+    background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.8);
+    transform: translateY(-2px);
+  }
+
+  /* ══════════════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════════════ */
+  footer {
+    background: #180a04; color: rgba(255,255,255,.65);
+    text-align: center; padding: 40px 24px;
+    font-size: .92rem; line-height: 1.9;
+  }
+  footer .ft-logo {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    color: #fff; display: block; margin-bottom: 8px;
+  }
+  footer a { color: var(--gold-lt); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ══════════════════════════════════════════════════
+     MOBILE STICKY CALL BAR (bottom)
+  ══════════════════════════════════════════════════ */
+  .mobile-cta {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
+    background: var(--wine);
+    background-image: linear-gradient(90deg, #9B2323, var(--wine));
+    padding: 14px 20px;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+  }
+  .mobile-cta a {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    color: #fff; text-decoration: none;
+    font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 700;
+    letter-spacing: .03em;
+  }
+
+  /* ══════════════════════════════════════════════════
+     MODAL
+  ══════════════════════════════════════════════════ */
+  .modal {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,4,2,.93);
+    align-items: center; justify-content: center;
+    padding: 16px; backdrop-filter: blur(8px);
+  }
+  .modal.active { display: flex; animation: mFadeIn .22s ease; }
+  @keyframes mFadeIn { from{opacity:0} to{opacity:1} }
+
+  .modal-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
+    max-width: min(92vw, 780px); width: 100%;
+    animation: mPop .3s cubic-bezier(.22,.68,0,1.3);
+    position: relative;
+  }
+  @keyframes mPop { from{transform:scale(.86);opacity:0} to{transform:scale(1);opacity:1} }
+
+  .modal-wrap img {
+    display: block; width: 100%; max-height: 76vh;
+    object-fit: contain; border-radius: 10px;
+    box-shadow: 0 0 80px rgba(0,0,0,.6);
+  }
+  .modal-close-big {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 18px 60px; border-radius: 50px;
+    background: var(--wine);
+    background-image: linear-gradient(135deg, var(--wine-lt), var(--wine));
+    color: #fff; border: none; cursor: pointer;
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;
+    letter-spacing: .05em;
+    box-shadow: 0 6px 28px rgba(123,24,24,.5);
+    transition: transform .2s, filter .2s;
+    flex-shrink: 0;
+  }
+  .modal-close-big:hover { transform: scale(1.04); filter: brightness(1.1); }
+  .modal-close-x {
+    position: absolute; top: -12px; right: -12px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; color: var(--wine);
+    border: none; cursor: pointer; font-size: 1.3rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
+    transition: transform .2s;
+  }
+  .modal-close-x:hover { transform: scale(1.12); }
+
+  /* ══════════════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════════════ */
+  @media (max-width: 780px) {
+    .spotlight-inner { grid-template-columns: 1fr; }
+    .spotlight-right { display: none; }
+    .spotlight-left { padding: 24px; border-right: none; }
+    body { padding-bottom: 68px; }
+    .mobile-cta { display: block; }
+  }
+  @media (max-width: 640px) {
+    .cards-grid { grid-template-columns: 1fr; gap: 28px; }
+    .card-body { padding: 22px 22px 0; }
+    .card-footer { padding: 18px 22px 22px; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .contact-btns { flex-direction: column; align-items: center; }
+  }
+  @media (max-width: 420px) { .why-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════ HEADER ══════════════ -->
-  <header>
-    <div class="header-notes">
-      <span class="note">🎵</span>
-      <span class="note">🎶</span>
-      <span class="note">🎸</span>
-      <span class="note">🎵</span>
-      <span class="note">🎶</span>
+  <!-- ═══════════════════════════════════════
+       STICKY PHONE BAR
+  ═══════════════════════════════════════ -->
+  <div class="phone-bar">
+    <span class="pb-label">📞 Reservierung &amp; Tickets</span>
+    <a href="tel:+4917679212777">+49 176 79212777</a>
+    <a href="tel:+4917679212777" class="pb-cta">Jetzt anrufen</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero-notes" aria-hidden="true">
+      <span>🎵</span><span>🎶</span><span>🎸</span><span>🎵</span><span>🎶</span>
     </div>
-    <span class="header-ornament">🎵 🌸 🎵</span>
-    <h1>Berliner Musikfreunde</h1>
-    <p class="header-tagline">Herzlich Willkommen zu unseren Live-Abenden in Berlin</p>
-    <div class="header-divider">🌸</div>
+    <span class="hero-eyebrow">Preußisches Landwirtshaus · Berlin</span>
+    <h1>Berliner<br><em>Musikfreunde</em></h1>
+    <p class="hero-sub">
+      Erleben Sie unvergessliche Live Abende voller Schlager, Country und
+      Volksmusik in herzlicher Atmosphäre, mit wunderbaren Künstlern.
+    </p>
+    <div class="hero-ornament"><span>🌸 &nbsp; 🎵 &nbsp; 🌸</span></div>
+    <a href="tel:+4917679212777" class="hero-cta">
+      📞 &nbsp; Jetzt Ticket reservieren
+    </a>
   </header>
 
-  <!-- ══════════════ SHOWS ═══════════════ -->
+  <!-- ═══════════════════════════════════════
+       QUICK DATES STRIP
+  ═══════════════════════════════════════ -->
+  <div class="dates-strip">
+    <div class="dates-strip-inner">
+      <span class="dates-strip-label">Alle Termine</span>
+      <span class="date-pill next" id="pill-may16">16. Mai 🔥</span>
+      <span class="date-pill-dot">♦</span>
+      <span class="date-pill" id="pill-may17">17. Mai</span>
+      <span class="date-pill-dot">♦</span>
+      <span class="date-pill" id="pill-jun21">21. Juni</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       NEXT SHOW SPOTLIGHT
+  ═══════════════════════════════════════ -->
+  <div class="spotlight" id="spotlight">
+    <div class="spotlight-inner">
+      <div class="spotlight-badge">⭐ &nbsp; Nächste Show &nbsp; — &nbsp; <span id="spl-countdown-text">Countdown läuft…</span></div>
+      <div class="spotlight-left">
+        <div class="spotlight-date">
+          <small>Samstag, 16. Mai 2026</small>
+          DIE Kay Dörfel<br>SHOW 🎸
+        </div>
+        <div class="spotlight-countdown" id="spl-cd">
+          <div class="cd-block"><span class="cd-num" id="cd-days">–</span><span class="cd-label">Tage</span></div>
+          <div class="cd-block"><span class="cd-num" id="cd-hrs">–</span><span class="cd-label">Std.</span></div>
+          <div class="cd-block"><span class="cd-num" id="cd-min">–</span><span class="cd-label">Min.</span></div>
+          <div class="cd-block"><span class="cd-num" id="cd-sec">–</span><span class="cd-label">Sek.</span></div>
+        </div>
+        <div class="spotlight-detail">
+          🕓 Einlass <strong>16:00</strong> · Beginn <strong>17:00 Uhr</strong><br>
+          📍 Preußisches Landwirtshaus, Flatowallee 23<br>
+          🎟 Eintritt: <strong>23 €</strong>
+        </div>
+        <a href="tel:+4917679212777" class="spotlight-btn">📞 &nbsp; Jetzt reservieren</a>
+      </div>
+      <div class="spotlight-right">
+        <img src="flyer9.jpg" alt="Kay Dörfel Show Flyer" onclick="openModal('flyer9.jpg')" title="Klicken zum Vergrößern">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ALL SHOWS
+  ═══════════════════════════════════════ -->
   <section>
-    <div class="section-intro">
-      <h2>Unsere kommenden Veranstaltungen</h2>
-      <p>Alle Shows im Preußischen Landwirtshaus · Flatowallee 23 · 14055 Berlin</p>
-      <div class="ornament-line">🎶</div>
+    <div class="section-head">
+      <h2>Alle Veranstaltungen 2026</h2>
+      <p>Immer sonntags im Preußischen Landwirtshaus · Eintritt 23 €</p>
+      <div class="deco-rule">🎶</div>
     </div>
 
     <div class="cards-grid">
-
-
-
-      <!-- Card 3 -->
-      <article class="show-card">
-        <div class="card-img-wrap" onclick="openModal('flyer9.jpg')">
+      
+      <!-- ── CARD 3 — NEXT SHOW ── -->
+      <article class="show-card is-next" data-show-date="2026-05-16">
+        <div class="next-badge">⭐ Nächste Show</div>
+        <div class="date-banner">
+          <span class="day-of-week">Samstag</span>
+          16. Mai 2026
+        </div>
+        <div class="card-flyer">
           <img src="flyer9.jpg" alt="Die Kay Dörfel Show">
-          <div class="zoom-hint"><span>🔍 Flyer vergrößern</span></div>
         </div>
-        <div class="date-banner">📅 16. Mai 2026</div>
+        <button class="zoom-btn" onclick="openModal('flyer9.jpg')">
+          <span class="zi">🔍</span> Flyer in voller Größe ansehen
+        </button>
         <div class="card-body">
-          <h2>DIE Kay Dörfel SHOW 🎸</h2>
-          <div class="info-rows">
-            <div class="info-row">
-              <span class="info-icon">🕓</span>
-              <div class="info-text">
-                <span class="info-label">Einlass &amp; Beginn</span>
-                <div class="times-row">
-                  <span class="time-chip">Einlass <strong>16:00</strong></span>
-                  <span class="time-chip">Beginn <strong>17:00</strong></span>
+          <h3 class="card-title">DIE Kay Dörfel SHOW 🎸</h3>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-emoji">🕓</span>
+              <div class="info-block">
+                <span class="info-lbl">Einlass &amp; Beginn</span>
+                <div class="chips">
+                  <span class="chip">Einlass 16:00</span>
+                  <span class="chip">Beginn 17:00</span>
                 </div>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">📍</span>
-              <div class="info-text">
-                <span class="info-label">Veranstaltungsort</span>
-                <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a>
+            <div class="info-item">
+              <span class="info-emoji">📍</span>
+              <div class="info-block">
+                <span class="info-lbl">Veranstaltungsort</span>
+                <span class="info-val"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a></span>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">🎟</span>
-              <div class="info-text">
-                <span class="info-label">Eintrittspreis</span>
+            <div class="info-item">
+              <span class="info-emoji">🎟</span>
+              <div class="info-block">
+                <span class="info-lbl">Eintritt</span>
                 <span class="price-tag">23 €</span>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <p class="contact-line">Tickets &amp; Reservierung:</p>
-          <a href="tel:+4917679212777" class="phone-link">📞 +49 176 79212777</a>
-          <a href="mailto: hjschippke@gmail.com" class="email-link">✉️ <span class="__cf_email__" data-cfemail="hjschippke@gmail.com">hjschippke@gmail.com</span></a>
-          <a href="tel:+4917679212777" class="btn-ticket">🎟 Jetzt Ticket reservieren</a>
+          <p class="cf-label">Tickets &amp; Reservierung</p>
+          <a href="tel:+4917679212777" class="cf-phone">📞 +49 176 79212777</a>
+          <a href="mailto:hjschippke@gmail.com" class="cf-email">✉️ hjschippke@gmail.com</a>
+          <a href="tel:+4917679212777" class="book-btn">🎟 &nbsp; Jetzt Ticket reservieren</a>
         </div>
       </article>
 
-      <!-- Card 4 -->
-      <article class="show-card">
-        <div class="card-img-wrap" onclick="openModal('flyer6.jpg')">
+      <!-- ── CARD 4 ── -->
+      <article class="show-card" data-show-date="2026-05-17">
+        <div class="date-banner">
+          <span class="day-of-week">Sonntag</span>
+          17. Mai 2026
+        </div>
+        <div class="card-flyer">
           <img src="flyer6.jpg" alt="URKNALL ZWO Vicky und Co">
-          <div class="zoom-hint"><span>🔍 Flyer vergrößern</span></div>
         </div>
-        <div class="date-banner">📅 17. Mai 2026</div>
+        <button class="zoom-btn" onclick="openModal('flyer6.jpg')">
+          <span class="zi">🔍</span> Flyer in voller Größe ansehen
+        </button>
         <div class="card-body">
-          <h2>URKNALL ZWO: Vicky &amp; Co 💫🎸</h2>
-          <div class="info-rows">
-            <div class="info-row">
-              <span class="info-icon">🕓</span>
-              <div class="info-text">
-                <span class="info-label">Einlass &amp; Beginn</span>
-                <div class="times-row">
-                  <span class="time-chip">Einlass <strong>16:00</strong></span>
-                  <span class="time-chip">Beginn <strong>17:00</strong></span>
+          <h3 class="card-title">URKNALL ZWO: Vicky &amp; Co 💫🎸</h3>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-emoji">🕓</span>
+              <div class="info-block">
+                <span class="info-lbl">Einlass &amp; Beginn</span>
+                <div class="chips">
+                  <span class="chip">Einlass 16:00</span>
+                  <span class="chip">Beginn 17:00</span>
                 </div>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">📍</span>
-              <div class="info-text">
-                <span class="info-label">Veranstaltungsort</span>
-                <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a>
+            <div class="info-item">
+              <span class="info-emoji">📍</span>
+              <div class="info-block">
+                <span class="info-lbl">Veranstaltungsort</span>
+                <span class="info-val"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a></span>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">🎟</span>
-              <div class="info-text">
-                <span class="info-label">Eintrittspreis</span>
+            <div class="info-item">
+              <span class="info-emoji">🎟</span>
+              <div class="info-block">
+                <span class="info-lbl">Eintritt</span>
                 <span class="price-tag">23 €</span>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <p class="contact-line">Tickets &amp; Reservierung:</p>
-          <a href="tel:+4917679212777" class="phone-link">📞 +49 176 79212777</a>
-          <a href="mailto: hjschippke@gmail.com" class="email-link">✉️ <span class="__cf_email__" data-cfemail="hjschippke@gmail.com">hjschippke@gmail.com</span></a>
-          <a href="tel:+4917679212777" class="btn-ticket">🎟 Jetzt Ticket reservieren</a>
+          <p class="cf-label">Tickets &amp; Reservierung</p>
+          <a href="tel:+4917679212777" class="cf-phone">📞 +49 176 79212777</a>
+          <a href="mailto:hjschippke@gmail.com" class="cf-email">✉️ hjschippke@gmail.com</a>
+          <a href="tel:+4917679212777" class="book-btn">🎟 &nbsp; Jetzt Ticket reservieren</a>
         </div>
       </article>
 
-      <!-- Card 5 -->
-      <article class="show-card">
-        <div class="card-img-wrap" onclick="openModal('flyer10.jpg')">
-          <img src="flyer10.jpg" alt="Wirtschaftswunderland mit Gerda Buchholz und Benno Radke">
-          <div class="zoom-hint"><span>🔍 Flyer vergrößern</span></div>
+      <!-- ── CARD 5 ── -->
+      <article class="show-card" data-show-date="2026-06-21">
+        <div class="date-banner">
+          <span class="day-of-week">Sonntag</span>
+          21. Juni 2026
         </div>
-        <div class="date-banner">📅 21. Juni 2026</div>
+        <div class="card-flyer">
+          <img src="flyer10.jpg" alt="Wirtschaftswunderland">
+        </div>
+        <button class="zoom-btn" onclick="openModal('flyer10.jpg')">
+          <span class="zi">🔍</span> Flyer in voller Größe ansehen
+        </button>
         <div class="card-body">
-          <h2>Wirtschaftswunderland<br>mit GERDA BUCHHOLZ &amp; BENNO RADKE 💫</h2>
-          <div class="info-rows">
-            <div class="info-row">
-              <span class="info-icon">🕓</span>
-              <div class="info-text">
-                <span class="info-label">Einlass &amp; Beginn</span>
-                <div class="times-row">
-                  <span class="time-chip">Einlass <strong>16:00</strong></span>
-                  <span class="time-chip">Beginn <strong>17:00</strong></span>
+          <h3 class="card-title">Wirtschaftswunderland<br>mit GERDA BUCHHOLZ &amp; BENNO RADKE 💫</h3>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-emoji">🕓</span>
+              <div class="info-block">
+                <span class="info-lbl">Einlass &amp; Beginn</span>
+                <div class="chips">
+                  <span class="chip">Einlass 16:00</span>
+                  <span class="chip">Beginn 17:00</span>
                 </div>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">📍</span>
-              <div class="info-text">
-                <span class="info-label">Veranstaltungsort</span>
-                <a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a>
+            <div class="info-item">
+              <span class="info-emoji">📍</span>
+              <div class="info-block">
+                <span class="info-lbl">Veranstaltungsort</span>
+                <span class="info-val"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a></span>
               </div>
             </div>
-            <div class="info-row">
-              <span class="info-icon">🎟</span>
-              <div class="info-text">
-                <span class="info-label">Eintrittspreis</span>
+            <div class="info-item">
+              <span class="info-emoji">🎟</span>
+              <div class="info-block">
+                <span class="info-lbl">Eintritt</span>
                 <span class="price-tag">23 €</span>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <p class="contact-line">Tickets &amp; Reservierung:</p>
-          <a href="tel:+4917679212777" class="phone-link">📞 +49 176 79212777</a>
-          <a href="mailto: hjschippke@gmail.com" class="email-link">✉️ <span class="__cf_email__" data-cfemail="hjschippke@gmail.com">hjschippke@gmail.com</span></a>
-          <a href="tel:+4917679212777" class="btn-ticket">🎟 Jetzt Ticket reservieren</a>
+          <p class="cf-label">Tickets &amp; Reservierung</p>
+          <a href="tel:+4917679212777" class="cf-phone">📞 +49 176 79212777</a>
+          <a href="mailto:hjschippke@gmail.com" class="cf-email">✉️ hjschippke@gmail.com</a>
+          <a href="tel:+4917679212777" class="book-btn">🎟 &nbsp; Jetzt Ticket reservieren</a>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- ══════════════ CONTACT ═════════════ -->
-  <div class="venue-section">
-    <h3>Haben Sie Fragen?</h3>
-    <p>Wir helfen Ihnen gerne bei der Reservierung oder Gruppenanfragen weiter!</p>
-    <div class="venue-contacts">
-      <a href="tel:+4917679212777" class="venue-contact-btn">📞 +49 176 79212777</a>
-     <a href="mailto: hjschippke@gmail.com" class="venue-contact-btn">✉️ <span class="__cf_email__" data-cfemail="hjschippke@gmail.com">hjschippke@gmail.com</span></a>
+  <!-- ═══════════════════════════════════════
+       WHY JOIN US
+  ═══════════════════════════════════════ -->
+  <section class="why-section">
+    <div class="section-head">
+      <h2>Warum zu uns kommen?</h2>
+      <p>Das sagen unsere Gäste — und das erleben Sie</p>
+      <div class="deco-rule">🌸</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🎵</span>
+        <h3>Live-Musik pur</h3>
+        <p>Echte Künstler, echte Musik — Schlager, Country und Volksmusik zum Mitfühlen und Mitsingen.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🤝</span>
+        <h3>Herzliche Atmosphäre</h3>
+        <p>Kommen Sie allein oder mit Freunden. Bei uns ist jeder willkommen — wie in guter alter Zeit.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💛</span>
+        <h3>Faire Preise</h3>
+        <p>Unvergessliche Erlebnisse bereits ab 23 € Eintritt. Einfach anrufen und reservieren.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📍</span>
+        <h3>Zentraler Ort</h3>
+        <p>Das Preußische Landwirtshaus in Berlin — gut erreichbar, gemütlich und mit bester Atmosphäre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════ -->
+  <section class="contact-section">
+    <h2>Wir freuen uns auf Ihren Anruf!</h2>
+    <p>Plätze sind begrenzt — sichern Sie sich Ihre Karte noch heute</p>
+    <a href="tel:+4917679212777" class="contact-phone-big">📞 +49 176 79212777</a>
+    <div class="contact-btns">
+      <a href="tel:+4917679212777" class="contact-btn">📞 Jetzt anrufen</a>
+      <a href="mailto:hjschippke@gmail.com" class="contact-btn">✉️ E-Mail schreiben</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <span class="ft-logo">Berliner Musikfreunde 🎶</span>
+    <p>© 2026 Berliner Musikfreunde — Mit ❤️ für Musikliebhaber gestaltet</p>
+    <p>Kontakt: <a href="tel:+4917679212777">+49 176 79212777</a> &nbsp;·&nbsp; <a href="mailto:hjschippke@gmail.com">hjschippke@gmail.com</a></p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       MOBILE STICKY CTA
+  ═══════════════════════════════════════ -->
+  <div class="mobile-cta">
+    <a href="tel:+4917679212777">📞 &nbsp; Jetzt anrufen &amp; Ticket reservieren</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL
+  ═══════════════════════════════════════ -->
+  <div id="imgModal" class="modal" onclick="handleBgClick(event)">
+    <div class="modal-wrap">
+      <button class="modal-close-x" onclick="closeModal()" aria-label="Schließen">✕</button>
+      <img id="modalImg" src="" alt="Flyer in voller Größe">
+      <button class="modal-close-big" onclick="closeModal()">✕ &nbsp; Schließen</button>
     </div>
   </div>
 
-  <!-- ══════════════ FOOTER ═══════════════ -->
-  <footer>
-    <span class="footer-title">Berliner Musikfreunde 🎶</span>
-    <p>© 2026 Berliner Musikfreunde — Mit ❤️ für Musikliebhaber gestaltet</p>
-    <p><a href="tel:+4917679212777">+49 176 79212777</a></p>
-  </footer>
+  <script>
+    /* ─── Modal ─── */
+    function openModal(src) {
+      document.getElementById('modalImg').src = src;
+      document.getElementById('imgModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('imgModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function handleBgClick(e) {
+      if (e.target === document.getElementById('imgModal')) closeModal();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  <!-- ══════════════ MODAL ════════════════ -->
-  <div id="imgModal" class="modal" onclick=
+    /* ─── Scroll-in animations ─── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
 
+    document.querySelectorAll('.show-card, .why-card, .spotlight').forEach(el => observer.observe(el));
 
+    /* ─── Countdown to May 16, 2026 17:00 Berlin time ─── */
+    function updateCountdown() {
+      const target = new Date('2026-05-16T17:00:00+02:00');
+      const now = new Date();
+      const diff = target - now;
 
+      if (diff <= 0) {
+        document.getElementById('spl-countdown-text').textContent = 'Die Show beginnt jetzt!';
+        document.getElementById('spl-cd').style.display = 'none';
+        return;
+      }
+
+      const days = Math.floor(diff / 864e5);
+      const hrs  = Math.floor((diff % 864e5) / 36e5);
+      const mins = Math.floor((diff % 36e5) / 6e4);
+      const secs = Math.floor((diff % 6e4) / 1000);
+
+      document.getElementById('cd-days').textContent = days;
+      document.getElementById('cd-hrs').textContent  = String(hrs).padStart(2,'0');
+      document.getElementById('cd-min').textContent  = String(mins).padStart(2,'0');
+      document.getElementById('cd-sec').textContent  = String(secs).padStart(2,'0');
+
+      if (days === 0)      document.getElementById('spl-countdown-text').textContent = 'Heute!';
+      else if (days === 1) document.getElementById('spl-countdown-text').textContent = 'Morgen!';
+      else                 document.getElementById('spl-countdown-text').textContent = `Noch ${days} Tage`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
 
 
 
