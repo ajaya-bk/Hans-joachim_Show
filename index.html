@@ -10,9 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-  /* ══════════════════════════════════════════════════
-     TOKENS
-  ══════════════════════════════════════════════════ */
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
@@ -47,9 +44,6 @@
     overflow-x: hidden;
   }
 
-  /* ══════════════════════════════════════════════════
-     STICKY TOP PHONE BAR
-  ══════════════════════════════════════════════════ */
   .phone-bar {
     position: sticky;
     top: 0;
@@ -95,9 +89,6 @@
   }
   .pb-cta:hover { background: var(--gold-pale) !important; transform: scale(1.04) !important; }
 
-  /* ══════════════════════════════════════════════════
-     HERO
-  ══════════════════════════════════════════════════ */
   .hero {
     background: var(--wine);
     background-image:
@@ -108,7 +99,6 @@
     position: relative;
     overflow: hidden;
   }
-  /* Warm glow orb */
   .hero::before {
     content: '';
     position: absolute;
@@ -118,7 +108,6 @@
     background: radial-gradient(ellipse, rgba(200,148,42,.25) 0%, transparent 65%);
     pointer-events: none;
   }
-  /* Decorative bottom wave */
   .hero::after {
     content: '';
     position: absolute;
@@ -128,7 +117,6 @@
     clip-path: ellipse(55% 100% at 50% 100%);
   }
 
-  /* Floating notes */
   .hero-notes span {
     position: absolute;
     font-size: 1.8rem;
@@ -221,9 +209,6 @@
     to   { opacity:1; transform: translateY(0); }
   }
 
-  /* ══════════════════════════════════════════════════
-     QUICK DATES STRIP
-  ══════════════════════════════════════════════════ */
   .dates-strip {
     background: var(--bg2);
     border-top: 1px solid var(--border);
@@ -268,9 +253,6 @@
   }
   .date-pill-dot { color: var(--gold); font-size: .7rem; }
 
-  /* ══════════════════════════════════════════════════
-     NEXT SHOW SPOTLIGHT
-  ══════════════════════════════════════════════════ */
   .spotlight {
     max-width: 860px;
     margin: 56px auto 0;
@@ -368,9 +350,6 @@
   }
   .spotlight-right img:hover { transform: scale(1.03); box-shadow: var(--shadow-lg); }
 
-  /* ══════════════════════════════════════════════════
-     SECTION HEADING
-  ══════════════════════════════════════════════════ */
   .section-head {
     text-align: center;
     padding: 70px 24px 40px;
@@ -392,9 +371,6 @@
   }
   .deco-rule::after { background: linear-gradient(to left, transparent, var(--gold)); }
 
-  /* ══════════════════════════════════════════════════
-     CARDS GRID
-  ══════════════════════════════════════════════════ */
   .cards-grid {
     max-width: 1240px; margin: 0 auto;
     padding: 0 24px 80px;
@@ -403,7 +379,6 @@
     gap: 36px;
   }
 
-  /* ── CARD ───────────────────────────────────────── */
   .show-card {
     background: var(--white);
     border: 1.5px solid var(--border);
@@ -424,7 +399,6 @@
   .show-card.past-show { opacity: .6; filter: grayscale(.4); }
   .show-card.past-show:hover { transform: translateY(-3px); }
 
-  /* "Nächste Show" glow ring */
   .show-card.is-next {
     border-color: var(--wine);
     box-shadow: 0 0 0 3px rgba(123,24,24,.15), var(--shadow-md);
@@ -441,7 +415,6 @@
   }
   .show-card.is-next .next-badge { display: block; }
 
-  /* Past overlay */
   .past-overlay {
     display: none;
     position: absolute; top: 14px; left: 14px; z-index: 10;
@@ -454,7 +427,6 @@
   }
   .show-card.past-show .past-overlay { display: block; }
 
-  /* DATE BANNER */
   .date-banner {
     background: var(--wine);
     background-image: linear-gradient(135deg, var(--wine-mid) 0%, var(--wine) 100%);
@@ -476,7 +448,6 @@
     opacity: .8; margin-bottom: 2px;
   }
 
-  /* FLYER IMAGE */
   .card-flyer { overflow: hidden; flex-shrink: 0; background: var(--bg2); }
   .card-flyer img {
     width: 100%; height: auto; display: block;
@@ -484,7 +455,6 @@
   }
   .show-card:hover .card-flyer img { transform: scale(1.02); }
 
-  /* ZOOM BUTTON */
   .zoom-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 15px 20px;
@@ -499,7 +469,6 @@
   .zoom-btn:hover { background: var(--gold-pale); color: var(--wine-mid); }
   .zoom-btn .zi { font-size: 1.2rem; }
 
-  /* CARD BODY */
   .card-body { padding: 26px 28px 0; flex-grow: 1; }
   .card-title {
     font-family: 'Playfair Display', serif;
@@ -537,7 +506,6 @@
     font-size: .9rem; color: var(--text2); font-weight: 600;
   }
 
-  /* CARD FOOTER */
   .card-footer {
     padding: 22px 28px 26px; margin-top: 22px;
     background: var(--bg2);
@@ -574,9 +542,6 @@
     box-shadow: 0 10px 30px rgba(123,24,24,.45); filter: brightness(1.1);
   }
 
-  /* ══════════════════════════════════════════════════
-     WHY US
-  ══════════════════════════════════════════════════ */
   .why-section {
     background: var(--bg2);
     border-top: 1px solid var(--border);
@@ -606,9 +571,6 @@
   }
   .why-card p { font-size: .95rem; color: var(--text2); line-height: 1.55; }
 
-  /* ══════════════════════════════════════════════════
-     CONTACT SECTION
-  ══════════════════════════════════════════════════ */
   .contact-section {
     text-align: center;
     padding: 80px 24px;
@@ -653,9 +615,6 @@
     transform: translateY(-2px);
   }
 
-  /* ══════════════════════════════════════════════════
-     FOOTER
-  ══════════════════════════════════════════════════ */
   footer {
     background: #180a04; color: rgba(255,255,255,.65);
     text-align: center; padding: 40px 24px;
@@ -668,9 +627,6 @@
   footer a { color: var(--gold-lt); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
-  /* ══════════════════════════════════════════════════
-     MOBILE STICKY CALL BAR (bottom)
-  ══════════════════════════════════════════════════ */
   .mobile-cta {
     display: none;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
@@ -686,9 +642,6 @@
     letter-spacing: .03em;
   }
 
-  /* ══════════════════════════════════════════════════
-     MODAL
-  ══════════════════════════════════════════════════ */
   .modal {
     display: none; position: fixed; inset: 0; z-index: 9999;
     background: rgba(10,4,2,.93);
@@ -735,9 +688,6 @@
   }
   .modal-close-x:hover { transform: scale(1.12); }
 
-  /* ══════════════════════════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════════════════════════ */
   @media (max-width: 780px) {
     .spotlight-inner { grid-template-columns: 1fr; }
     .spotlight-right { display: none; }
@@ -757,18 +707,12 @@
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
-       STICKY PHONE BAR
-  ═══════════════════════════════════════ -->
   <div class="phone-bar">
     <span class="pb-label">📞 Reservierung &amp; Tickets</span>
     <a href="tel:+4917679212777">+49 176 79212777</a>
     <a href="tel:+4917679212777" class="pb-cta">Jetzt anrufen</a>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════ -->
   <header class="hero">
     <div class="hero-notes" aria-hidden="true">
       <span>🎵</span><span>🎶</span><span>🎸</span><span>🎵</span><span>🎶</span>
@@ -785,27 +729,21 @@
     </a>
   </header>
 
-  <!-- ═══════════════════════════════════════
-       QUICK DATES STRIP
-  ═══════════════════════════════════════ -->
   <div class="dates-strip">
     <div class="dates-strip-inner">
       <span class="dates-strip-label">Alle Termine</span>
-      <span class="date-pill next" id="pill-may17">21. Juni 🔥</span>
+      <span class="date-pill next" id="pill-jun21">21. Juni 🔥</span>
       <span class="date-pill-dot">♦</span>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       NEXT SHOW SPOTLIGHT
-  ═══════════════════════════════════════ -->
   <div class="spotlight" id="spotlight">
     <div class="spotlight-inner">
       <div class="spotlight-badge">⭐ &nbsp; Nächste Show &nbsp; — &nbsp; <span id="spl-countdown-text">Countdown läuft…</span></div>
       <div class="spotlight-left">
         <div class="spotlight-date">
           <small>Sonntag, 21. Juni 2026</small>
-          Wirtschaftswunderland<br>mit GERDA BUCHHOLZ BENNO RADKE 💫
+          Wirtschaftswunderland<br>mit GERDA BUCHHOLZ &amp; BENNO RADKE 💫
         </div>
         <div class="spotlight-countdown" id="spl-cd">
           <div class="cd-block"><span class="cd-num" id="cd-days">–</span><span class="cd-label">Tage</span></div>
@@ -826,9 +764,6 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       ALL SHOWS
-  ═══════════════════════════════════════ -->
   <section>
     <div class="section-head">
       <h2>Alle Veranstaltungen 2026</h2>
@@ -837,9 +772,10 @@
     </div>
     <div class="cards-grid">
 
-      <!-- ── CARD 1 ── -->
-      <article class="show-card" data-show-date="2026-05-17">
+      <!-- CARD: 21. Juni 2026 — BUGFIX: data-show-date corrected from 2026-05-17 to 2026-06-21 -->
+      <article class="show-card" data-show-date="2026-06-21">
         <div class="next-badge">⭐ Nächste Show</div>
+        <div class="past-overlay">Vergangen</div>
         <div class="date-banner">
           <span class="day-of-week">Sonntag</span>
           21. Juni 2026
@@ -890,9 +826,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       WHY JOIN US
-  ═══════════════════════════════════════ -->
   <section class="why-section">
     <div class="section-head">
       <h2>Warum zu uns kommen?</h2>
@@ -923,12 +856,9 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       CONTACT
-  ═══════════════════════════════════════ -->
   <section class="contact-section">
     <h2>Wir freuen uns auf Ihren Anruf!</h2>
-    <p>Plätze sind begrenzt-sichern Sie sich Ihre Karte noch heute</p>
+    <p>Plätze sind begrenzt — sichern Sie sich Ihre Karte noch heute</p>
     <a href="tel:+4917679212777" class="contact-phone-big">📞 +49 176 79212777</a>
     <div class="contact-btns">
       <a href="tel:+4917679212777" class="contact-btn">📞 Jetzt anrufen</a>
@@ -936,25 +866,16 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════ -->
   <footer>
     <span class="ft-logo">Berliner Musikfreunde 🎶</span>
     <p>© 2026 Berliner Musikfreunde — Mit ❤️ für Musikliebhaber gestaltet</p>
     <p>Kontakt: <a href="tel:+4917679212777">+49 176 79212777</a> &nbsp;·&nbsp; <a href="mailto:hjschippke@gmail.com">hjschippke@gmail.com</a></p>
   </footer>
 
-  <!-- ═══════════════════════════════════════
-       MOBILE STICKY CTA
-  ═══════════════════════════════════════ -->
   <div class="mobile-cta">
     <a href="tel:+4917679212777">📞 &nbsp; Jetzt anrufen &amp; Ticket reservieren</a>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       MODAL
-  ═══════════════════════════════════════ -->
   <div id="imgModal" class="modal" onclick="handleBgClick(event)">
     <div class="modal-wrap">
       <button class="modal-close-x" onclick="closeModal()" aria-label="Schließen">✕</button>
@@ -964,7 +885,7 @@
   </div>
 
   <script>
-    /* ─── Modal ─── */
+    /* Modal */
     function openModal(src) {
       document.getElementById('modalImg').src = src;
       document.getElementById('imgModal').classList.add('active');
@@ -979,7 +900,7 @@
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    /* ─── Scroll-in animations ─── */
+    /* Scroll-in animations */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -991,9 +912,21 @@
 
     document.querySelectorAll('.show-card, .why-card, .spotlight').forEach(el => observer.observe(el));
 
-    /* ─── Countdown to May 16, 2026 17:00 Berlin time ─── */
+    /* Mark past / next cards */
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    document.querySelectorAll('.show-card[data-show-date]').forEach(card => {
+      const d = new Date(card.dataset.showDate);
+      if (d < today) {
+        card.classList.add('past-show');
+      } else {
+        card.classList.add('is-next');
+      }
+    });
+
+    /* Countdown — BUGFIX: target corrected to 2026-06-21T17:00:00+02:00 */
     function updateCountdown() {
-      const target = new Date('2026-05-16T17:00:00+02:00');
+      const target = new Date('2026-06-21T17:00:00+02:00');
       const now = new Date();
       const diff = target - now;
 
