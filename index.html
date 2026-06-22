@@ -732,7 +732,7 @@
   <div class="dates-strip">
     <div class="dates-strip-inner">
       <span class="dates-strip-label">Alle Termine</span>
-      <span class="date-pill next" id="pill-jun21">21. Juni 🔥</span>
+      <span class="date-pill next" id="pill-jul22">22. Juli 🔥</span>
       <span class="date-pill-dot">♦</span>
     </div>
   </div>
@@ -742,8 +742,8 @@
       <div class="spotlight-badge">⭐ &nbsp; Nächste Show &nbsp; — &nbsp; <span id="spl-countdown-text">Countdown läuft…</span></div>
       <div class="spotlight-left">
         <div class="spotlight-date">
-          <small>Sonntag, 21. Juni 2026</small>
-          Wirtschaftswunderland<br>mit GERDA BUCHHOLZ &amp; BENNO RADKE 💫
+          <small>Mittwoch, 22. Juli 2026</small>
+          Mexico trifft Berlin<br>Los Carinos Von Schlager bis Mariachi 💫
         </div>
         <div class="spotlight-countdown" id="spl-cd">
           <div class="cd-block"><span class="cd-num" id="cd-days">–</span><span class="cd-label">Tage</span></div>
@@ -752,14 +752,14 @@
           <div class="cd-block"><span class="cd-num" id="cd-sec">–</span><span class="cd-label">Sek.</span></div>
         </div>
         <div class="spotlight-detail">
-          🕓 Einlass <strong>16:00</strong> · Beginn <strong>17:00 Uhr</strong><br>
+          🕓 Einlass <strong>17:00</strong> · Beginn <strong>18:00 Uhr</strong><br>
           📍 Preußisches Landwirtshaus, Flatowallee 23<br>
           🎟 Eintritt: <strong>23 €</strong>
         </div>
         <a href="tel:+4917679212777" class="spotlight-btn">📞 &nbsp; Jetzt reservieren</a>
       </div>
       <div class="spotlight-right">
-        <img src="flyer10.jpg" alt="Wirtschaftswunderland" onclick="openModal('flyer10.jpg')" title="Klicken zum Vergrößern">
+        <img src="flyer10.jpg" alt="Wirtschaftswunderland" onclick="openModal('flyer11.jpg')" title="Klicken zum Vergrößern">
       </div>
     </div>
   </div>
@@ -772,30 +772,29 @@
     </div>
     <div class="cards-grid">
 
-      <!-- CARD: 21. Juni 2026 — BUGFIX: data-show-date corrected from 2026-05-17 to 2026-06-21 -->
-      <article class="show-card" data-show-date="2026-06-21">
+      <article class="show-card" data-show-date="2026-07-22">
         <div class="next-badge">⭐ Nächste Show</div>
         <div class="past-overlay">Vergangen</div>
         <div class="date-banner">
-          <span class="day-of-week">Sonntag</span>
-          21. Juni 2026
+          <span class="day-of-week">Mittwoch</span>
+          22. Juli 2026
         </div>
         <div class="card-flyer">
-          <img src="flyer10.jpg" alt="Wirtschaftswunderland">
+          <img src="flyer11.jpg" alt="Mexico trifft Berlin">
         </div>
-        <button class="zoom-btn" onclick="openModal('flyer10.jpg')">
+        <button class="zoom-btn" onclick="openModal('flyer11.jpg')">
           <span class="zi">🔍</span> Flyer in voller Größe ansehen
         </button>
         <div class="card-body">
-          <h3 class="card-title">Wirtschaftswunderland<br>mit GERDA BUCHHOLZ &amp; BENNO RADKE 💫</h3>
+          <h3 class="card-title">Mexico trifft Berlin<br>Los Carinos Von Schlager bis Mariachi 💫</h3>
           <div class="info-list">
             <div class="info-item">
               <span class="info-emoji">🕓</span>
               <div class="info-block">
                 <span class="info-lbl">Einlass &amp; Beginn</span>
                 <div class="chips">
-                  <span class="chip">Einlass 16:00</span>
-                  <span class="chip">Beginn 17:00</span>
+                  <span class="chip">Einlass 17:00</span>
+                  <span class="chip">Beginn 18:00</span>
                 </div>
               </div>
             </div>
@@ -924,9 +923,9 @@
       }
     });
 
-    /* Countdown — BUGFIX: target corrected to 2026-06-21T17:00:00+02:00 */
+    
     function updateCountdown() {
-      const target = new Date('2026-06-21T17:00:00+02:00');
+      const target = new Date('2026-07-22T18:00:00+02:00');
       const now = new Date();
       const diff = target - now;
 
