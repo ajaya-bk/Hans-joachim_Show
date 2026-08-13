@@ -734,6 +734,7 @@
       <span class="dates-strip-label">Alle Termine</span>
       <span class="date-pill next" id="pill-sep28">28. September 🔥</span>
       <span class="date-pill-dot">♦</span>
+      <span class="date-pill" id="pill-oct18">18. Oktober</span>
     </div>
   </div>
 
@@ -787,6 +788,56 @@
         </button>
         <div class="card-body">
           <h3 class="card-title">Oktoberfest Flair<br>und Mexikanische Mariachi-Musik 💫</h3>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-emoji">🕓</span>
+              <div class="info-block">
+                <span class="info-lbl">Einlass &amp; Beginn</span>
+                <div class="chips">
+                  <span class="chip">Einlass 16:00</span>
+                  <span class="chip">Beginn 17:00</span>
+                </div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-emoji">📍</span>
+              <div class="info-block">
+                <span class="info-lbl">Veranstaltungsort</span>
+                <span class="info-val"><a href="https://www.google.com/maps/dir//Flatowallee+23,+14055+Berlin" target="_blank">Preußisches Landwirtshaus,<br>Flatowallee 23, 14055 Berlin ↗</a></span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-emoji">🎟</span>
+              <div class="info-block">
+                <span class="info-lbl">Eintritt</span>
+                <span class="price-tag">23 €</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <p class="cf-label">Tickets &amp; Reservierung</p>
+          <a href="tel:+4917679212777" class="cf-phone">📞 +49 176 79212777</a>
+          <a href="mailto:hjschippke@gmail.com" class="cf-email">✉️ hjschippke@gmail.com</a>
+          <a href="tel:+4917679212777" class="book-btn">🎟 &nbsp; Jetzt Ticket reservieren</a>
+        </div>
+      </article>
+
+      <article class="show-card" data-show-date="2026-10-18">
+        <div class="next-badge">⭐ Nächste Show</div>
+        <div class="past-overlay">Vergangen</div>
+        <div class="date-banner">
+          <span class="day-of-week">Sonntag</span>
+          18. Oktober 2026
+        </div>
+        <div class="card-flyer">
+          <img src="flyerB.jpg" alt="Griechischer Wein und Berliner Weiße">
+        </div>
+        <button class="zoom-btn" onclick="openModal('flyerB.jpg')">
+          <span class="zi">🔍</span> Flyer in voller Größe ansehen
+        </button>
+        <div class="card-body">
+          <h3 class="card-title">Griechischer Wein<br>und Berliner Weiße 🇬🇷 · Urlaubs-Feeling mit Stefanie Simon &amp; Costa Latsos</h3>
           <div class="info-list">
             <div class="info-item">
               <span class="info-emoji">🕓</span>
@@ -911,17 +962,22 @@
 
     document.querySelectorAll('.show-card, .why-card, .spotlight').forEach(el => observer.observe(el));
 
-    /* Mark past / next cards */
+    /* Mark past shows, then flag only the single soonest upcoming show as "next" */
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    document.querySelectorAll('.show-card[data-show-date]').forEach(card => {
+    const cards = Array.from(document.querySelectorAll('.show-card[data-show-date]'));
+    let soonestCard = null;
+    let soonestDate = null;
+    cards.forEach(card => {
       const d = new Date(card.dataset.showDate);
       if (d < today) {
         card.classList.add('past-show');
-      } else {
-        card.classList.add('is-next');
+      } else if (!soonestDate || d < soonestDate) {
+        soonestDate = d;
+        soonestCard = card;
       }
     });
+    if (soonestCard) soonestCard.classList.add('is-next');
 
     
     function updateCountdown() {
